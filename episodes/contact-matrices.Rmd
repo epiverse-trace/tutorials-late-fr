@@ -1,95 +1,89 @@
 ---
-title: 'Contact matrices'
+title: Matrices de contact
 teaching: 40
 exercises: 10
 ---
 
-```{r setup, echo= FALSE, message = FALSE, warning = FALSE}
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 # we need {webshot} to print {DiagrammeR} outputs
 webshot::install_phantomjs(force = TRUE)
 ```
 
-:::::::::::::::::::::::::::::::::::::: questions 
+:::::::::::::::::::::::::::::::::::::: questions
 
-- What is a contact matrix?
-- How are contact matrices estimated?
-- How are contact matrices used in epidemiological analysis?
+- Qu'est-ce qu'une matrice de contact ?
+- Comment les matrices de contact sont-elles estimées ?
+- Comment les matrices de contact sont-elles utilisées dans l'analyse épidémiologique ?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Use the R package `socialmixr` to estimate a contact matrix
-- Understand the different types of analysis contact matrices can be used for 
-::::::::::::::::::::::::::::::::::::::::::::::::
+- Utilisez le package R `socialmixr` pour estimer une matrice de contact
+- Comprendre les différents types d'analyse pour lesquels les matrices de contact peuvent être utilisées
+  ::::::::::::::::::::::::::::::::::::::::::::::::
 
-<!-- ::::::::::::::::::::::::::::::::::::: prereq -->
+<!-- :::::::::::::::::::::::::::::::::::: : prereq -->
 
-<!-- ## Prerequisites -->
+<!-- ## Prérequis -->
 
-
-
-<!-- ::::::::::::::::::::::::::::::::: -->
-
+<!-- :::::::::::::::::::::::::::::::: : -->
 
 ## Introduction
 
-Some groups of individuals have more contacts than others; the average schoolchild has many more daily contact than the average elderly person, for example. This heterogeneity of contact patterns between different groups can affect disease transmission, because certain groups are more likely to transmit to others within that group, as well as to other groups. The rate at which individuals within and between groups make contact with others can be summarised in a contact matrix. In this tutorial we are going to learn how contact matrices can be used in different analyses and how the `{socialmixr}` package can be used to estimate contact matrices. 
+Certains groupes d'individus ont plus de contacts que d'autres ; l'écolier moyen a beaucoup plus de contacts quotidiens que la personne âgée moyenne, par exemple. Cette hétérogénéité des schémas de contact entre les différents groupes peut avoir un impact sur la transmission des maladies, car certains groupes sont plus susceptibles de transmettre la maladie à d'autres membres de ce groupe, ainsi qu'à d'autres groupes. La vitesse à laquelle les individus d'un même groupe et d'un groupe à l'autre entrent en contact avec d'autres personnes peut être résumée dans une matrice de contact. Dans ce tutoriel, nous allons apprendre comment les matrices de contact peuvent être utilisées dans différentes analyses et comment le package `{socialmixr}` peut être utilisé pour estimer les matrices de contact.
 
-
-```{r,message=FALSE,warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 library(socialmixr)
 ```
 
-
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
-
-
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## The contact matrix
+## La matrice de contact
 
-The basic contact matrix represents the amount of contact or mixing within and between different subgroups of a population. The subgroups are often age categories but can also be:
+La matrice de contact de base représente la quantité de contacts, ou de mélanges, au sein de différents sous-groupes d'une population et entre ces sous-groupes. Les sous-groupes sont souvent des catégories d'âge, mais peuvent aussi être.. :
 
-- Geographic areas (e.g., different regions or countries)
-- Risk groups (e.g., high/low risk occupations)
-- Social settings (e.g., household, workplace, school)
+- des zones géographiques (par exemple, différentes régions ou différents pays)
+- Groupes à risque (par exemple, professions à haut/faible risque)
+- Milieux sociaux (ménage, lieu de travail, école, etc.)
 
-For example, a hypothetical contact matrix representing the average number of contacts per day between children and adults could be:
+Par exemple, une matrice de contact hypothétique représentant le nombre moyen de contacts par jour entre les enfants et les adultes pourrait être la suivante :
 
 $$
 \begin{bmatrix}
-2 & 2\\
-1 & 3 
+2 & 2\
+1 & 3
 \end{bmatrix}
 $$
-In this example, we would use this to represent that children meet, on average, 2 other children and 2 adult per day (first row), and adults meet, on average, 1 child and 3 other adults per day (second row). We can use this kind of information to account for the role heterogeneity in contact plays in infectious disease transmission.
+Dans cet exemple, cela signifie que les enfants rencontrent en moyenne 2 autres enfants et 2 adultes par jour (première ligne), et que les adultes rencontrent en moyenne 1 enfant et 3 autres adultes par jour (deuxième ligne). Nous pouvons utiliser ce type d'information pour rendre compte du rôle que joue l'hétérogénéité des contacts dans la transmission des maladies infectieuses.
 
 ::::::::::::::::::::::::::::::::::::: callout
 
-### A Note on Notation
-For a contact matrix with rows $i$ and columns $j$:
+### Note sur la notation
 
-- $C[i,j]$ represents the average number of contacts that individuals in group $i$ have with individuals in group $j$
-- This average is calculated as the total number of contacts between groups $i$ and $j$, divided by the number of individuals in group $i$
+Pour une matrice de contact avec des lignes $i$ et des colonnes $j$:
+
+-  $C [i,j] $ représente le nombre moyen de contacts que les individus du groupe $i$ ont avec les individus du groupe $j$
+- Cette moyenne est calculée comme le nombre total de contacts entre les groupes. $i$ et $j$, divisé par le nombre d'individus dans le groupe $i$
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Using `socialmixr`
+## L'utilisation `socialmixr`
 
-Contact matrices are commonly estimated from studies that use diaries to record interactions. For example, the POLYMOD survey measured contact patterns in 8 European countries using data on the location and duration of contacts reported by the study participants [(Mossong et al. 2008)](https://doi.org/10.1371/journal.pmed.0050074).
+Les matrices de contact sont généralement estimées à partir des études qui utilisent des journaux pour enregistrer les interactions. Par exemple, l'enquête POLYMOD a mesuré les schémas de contact dans 8 pays européens en utilisant des données sur le lieu et la durée des contacts signalés par les participants à l'étude. [(Mossong et al. 2008)](https://doi.org/10.1371/journal.pmed.0050074).
 
-The R package `{socialmixr}` contains functions which can estimate contact matrices from POLYMOD and other surveys. We can load the POLYMOD survey data:
+Le package R `{socialmixr}` contient des fonctions permettant d'estimer les matrices de contact à partir de POLYMOD et d'autres enquêtes. Nous pouvons charger les données de l'enquête POLYMOD :
 
-
-```{r polymod_, echo = TRUE}
+```{r polymod_, echo=TRUE}
 polymod <- socialmixr::polymod
 ```
 
-Then we can obtain the contact matrix for the age categories we want by specifying `age.limits`. 
+Nous pouvons alors obtenir la matrice de contact pour les catégories d'âge souhaitées en spécifiant `age.limits`.
 
-```{r polymod_uk, echo = TRUE}
-contact_data <- socialmixr::contact_matrix(
+```{r polymod_uk, echo=TRUE}
+contact_data <- contact_matrix(
   survey = polymod,
   countries = "United Kingdom",
   age.limits = c(0, 20, 40),
@@ -98,41 +92,38 @@ contact_data <- socialmixr::contact_matrix(
 contact_data
 ```
 
-
-
-**Note: although the contact matrix `contact_data$matrix` is not itself mathematically symmetric, it satisfies the condition that the total number of contacts of one group with another is the same as the reverse. In other words:
+**Remarque : bien que la matrice de contact `contact_data$matrix` ne soit pas elle-même mathématiquement symétrique, elle satisfait à la condition selon laquelle le nombre total de contacts d'un groupe avec un autre est le même que l'inverse. En d'autres termes :
 `contact_data$matrix[j,i]*contact_data$demography$proportion[j] = contact_data$matrix[i,j]*contact_data$demography$proportion[i]`.
-For the mathematical explanation see [the corresponding section in the socialmixr documentation](https://epiforecasts.io/socialmixr/articles/socialmixr.html#symmetric-contact-matrices).**
-
+Pour l'explication mathématique, voir [la section correspondante dans la documentation de socialmixr](https://epiforecasts.io/socialmixr/articles/socialmixr.html#symmetric-contact-matrices).**
 
 ::::::::::::::::::::::::::::::::::::: callout
-### Why would a contact matrix be non-symmetric?
 
-One of the arguments we gave the function `contact_matrix()` is `symmetric=TRUE`. This ensures that the total number of contacts from one group to another is equal to the total from the second group back to the first (see the `socialmixr` [vignette](https://cran.r-project.org/web/packages/socialmixr/vignettes/socialmixr.html) for more detail). 
+### Pourquoi une matrice de contact serait-elle non symétrique ?
 
-However, when contact matrices are estimated from surveys or other sources, the *reported* number of contacts may differ by age group for several reasons:
+L'un des arguments que nous avons donné à la fonction `contact_matrix()` est `symmetric=TRUE`. Cela garantit que le nombre total de contacts d'un groupe à l'autre est égal au nombre total de contacts du second groupe au premier (voir la section `socialmixr` [vignette](https://cran.r-project.org/web/packages/socialmixr/vignettes/socialmixr.html) pour plus de détails).
 
-- Recall bias: Different age groups may have different abilities to remember and report contacts accurately
-- Reporting bias: Some groups may systematically over- or under-report their contacts
-- Sampling uncertainty: Limited sample sizes can lead to statistical variations
-[(Prem et al 2021)](https://doi.org/10.1371/journal.pcbi.1009098)
+Cependant, lorsque les matrices de contact sont estimées à partir d'enquêtes ou d'autres sources, le nombre de contacts *signalés* peut différer selon le groupe d'âge pour plusieurs raisons :
 
-If `symmetric` is set to TRUE, the `contact_matrix()` function will internally use an average of reported contacts to ensure the resulting total number of contacts are symmetric.
+- Biais de mémorisation : Les différents groupes d'âge pourraient avoir des capacités différentes à se souvenir des contacts et à les décrire avec précision.
+- Biais de déclaration : certains groupes pourraient systématiquement surestimer ou sous-estimer leurs contacts.
+- Incertitude de l'échantillonnage : La taille limitée des échantillons pourrait entraîner des variations statistiques
+  [(Prem et al 2021)](https://doi.org/10.1371/journal.pcbi.1009098)
+
+Si `symmetric` est réglé sur VRAI, la fonction `contact_matrix()` utilisera une moyenne des contacts signalés pour s'assurer que le nombre total de contacts obtenu est symétrique.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-The example above uses the POLYMOD survey. There are a number of surveys available in `socialmixr`. To list the available surveys, use `socialmixr::list_surveys()`. To download a survey, we can use `socialmixr::get_survey()`
+L'exemple ci-dessus utilise l'enquête POLYMOD. Il existe un certain nombre d'enquêtes disponibles dans `socialmixr` Pour obtenir la liste des enquêtes disponibles, utilisez `list_surveys()`. Pour télécharger une enquête, vous pouvez utiliser `get_survey()`
 
-```{r, message = FALSE, warning = FALSE}
-# Access the contact survey data from Zenodo
-zambia_sa_survey <- socialmixr::get_survey(
+```{r, message=FALSE, warning=FALSE}
+zambia_sa_survey <- get_survey(
   "https://doi.org/10.5281/zenodo.3874675"
 )
 ```
 
 :::::::::::::::::: spoiler
 
-You can explore all the available surveys from the Zenodo repository at <https://zenodo.org/communities/social_contact_data/>. If you are interested in accessing to a specific URL within R, you can try:
+Vous pouvez explorer toutes les enquêtes disponibles dans le référentiel Zenodo à l'adresse <https://zenodo.org/communities/social_contact_data/>. Si vous souhaitez accéder à une URL spécifique dans R, vous pouvez essayer :
 
 ```r
 library(socialmixr)
@@ -146,37 +137,37 @@ socialmixr::list_surveys() %>%
 
 ::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::: challenge
 
-::::::::::::::::::::::::::::::::::::: challenge 
+## Matrice des contacts en Zambie
 
-## Zambia contact matrix
+Le package R {socialmixr} contient des fonctions permettant d'estimer les matrices de contacts à partir de POLYMOD et d'autres enquêtes. Les résultats comprennent des informations démographiques telles que la taille de la population et le nombre de participants à l'étude. En utilisant {socialmixr}:
 
-The R package {socialmixr} contains functions which can estimate contact matrices from POLYMOD and other surveys. Outputs include demographic information like population size and number of participants in the study. Using {socialmixr}: 
+- Téléchargé l'enquête de la Zambie
 
-+ Get access to the survey from Zambia. 
-+ Generate a symmetric contact matrix for Zambia using the following age bins:
+- Générez une matrice de contact symétrique pour la Zambie en utilisant les tranches d'âge suivantes :
 
-    + [0,20)
-    + 20+
+    - [0,20)
+    - 20+
 
-+ Get access to the vector of `population` size per age bin from the `demography` dataset inside the contact matrix output.
++ Accédez au vecteur représentant la taille de la population par tranche d'âge à partir du tableau de données démographiques dans la matrice de contact.
 
 ::::::::::::::::::::: hint
 
-The survey object `zambia_sa_survey` contains data from two countries. If you need to estimate the social contact matrix from data of the specific country of Zambia, identify what argument in `socialmixr::contact_matrix()` you need for this.
+L'objet d'enquête `zambia_sa_survey` contient des données provenant de deux pays. Si vous avez besoin d'estimer la matrice des contacts sociaux à partir des données spécifiques à la Zambie, identifiez l'argument dont vous avez besoin dans `socialmixr::contact_matrix()` pour cela.
 
 ```{r}
 # Inspect the countries within the survey object
 levels(zambia_sa_survey$participants$country)
 ```
 
-Similar to the code above, to access vector values within a dataframe, you can use the dollar-sign operator: `$`
+Comme dans le code ci-dessus, pour accéder aux valeurs vectorielles dans un dataframe, vous pouvez utiliser l'opérateur signe dollar : `$`
 
 :::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::: instructor 
+:::::::::::::::::::::::: instructor
 
 ```{r polymod_poland}
 # Generate the contact matrix for Zambia only
@@ -193,43 +184,41 @@ contact_data_zambia
 # Print the vector of population size for {epidemics}
 contact_data_zambia$demography$population
 ```
+
 :::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: callout
-## Synthetic contact matrices
 
-Contact matrices can be estimated from data obtained from diary (such as POLYMOD), survey or contact data, or synthetic ones can be used. [Prem et al. 2021](https://doi.org/10.1371/journal.pcbi.1009098) used the POLYMOD data within a Bayesian hierarchical model to project contact matrices for 177 other countries.
+## Matrices de contact synthétiques
+
+Les matrices de contact peuvent être estimées à partir de données obtenues des journaux (tels que POLYMOD), d'enquêtes ou de données de contact. [Prem et al. 2021](https://doi.org/10.1371/journal.pcbi.1009098) ont utilisé les données POLYMOD dans le cadre d'un modèle hiérarchique bayésien pour projeter les matrices de contact de 177 autres pays.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Analyses avec des matrices de contact
 
+On peut utiliser les matrices de contact pour effectuer de nombreuses analyses épidémiologiques différentes :
 
+- pour calculer le nombre de reproduction de base tout en tenant compte des différents taux de contacts entre les groupes d'âge [(Funk et al. 2019)](https://doi.org/10.1186/s12916-019-1413-7),
+- pour calculer la taille finale d'une épidémie, comme dans le package R `{finalsize}`,
+- pour évaluer l'impact des interventions en déterminant le changement relatif entre les matrices de contact avant et après l'intervention pour calculer la différence relative dans le nombre de cas. $R_0$ [(Jarvis et al. 2020)](https://doi.org/10.1186/s12916-020-01597-8),
+- et dans les modèles mathématiques de transmission au sein d'une population, afin de tenir compte des schémas de contact propres à chaque groupe.
 
-## Analyses with contact matrices
+Cependant, toutes ces applications nous obligent à effectuer des calculs supplémentaires à l'aide de la matrice de contact. Plus précisément, nous devons souvent effectuer deux calculs principaux :
 
-Contact matrices can be used in a wide range of epidemiological analyses, they can be used:
+1. **Convertir la matrice de contact en nombre attendu de cas secondaires**
 
-+ to calculate the basic reproduction number while accounting for different rates of contacts between age groups [(Funk et al. 2019)](https://doi.org/10.1186/s12916-019-1413-7),
-+ to calculate final size of an epidemic, as in the R package `{finalsize}`,
-+ to assess the impact of interventions finding the relative change between pre and post intervention contact matrices to calculate the relative difference in $R_0$ [(Jarvis et al. 2020)](https://doi.org/10.1186/s12916-020-01597-8),
-+ and in mathematical models of transmission within a population, to account for group specific contact patterns.
+Si les contacts varient entre les groupes, le nombre moyen de cas secondaires ne sera pas simplement égal au nombre moyen de contacts multiplié par la probabilité de transmission par contact. En effet, la quantité moyenne de transmission dans chaque génération d'infection ne dépend pas seulement des personnes avec lesquelles un groupe est entré en contact, mais aussi des personnes avec lesquelles ces contacts sont ensuite entrés en contact. La fonction `r_eff` dans le package `{finalsize}` peut effectuer cette conversion, en prenant une matrice de contact, la démographie et la proportion de personnes sensibles et en la convertissant en une estimation du nombre moyen de cas secondaires générés par un individu infectieux typique (c'est-à-dire le nombre de reproduction effectif).
 
+2. **Convertir la matrice des contacts en taux de contact**
 
-However, all of these applications require us to perform some additional calculations using the contact matrix. Specifically, there are two main calculations we often need to do:
+Alors qu'une matrice de contacts donne le nombre moyen de contacts qu'un groupe a avec un autre, la dynamique épidémique dans différents groupes dépend du taux auquel un groupe en infecte un autre. Nous devons donc mettre à l'échelle le taux d'interaction entre les différents groupes (c'est-à-dire le nombre de contacts par unité de temps) pour obtenir le taux de transmission. Cependant, nous devons veiller à définir correctement la transmission vers et depuis chaque groupe dans n'importe quel modèle. Plus précisément, l'entrée $(i,j)$ dans la matrice des contacts d'un modèle mathématique représente les contacts du groupe $i$ avec le groupe $j$. Mais si nous voulons connaître le taux auquel un groupe $i$ est infecté, nous devons multiplier le nombre de contacts des personnes sensibles dans le groupe $i$ ($S_i$) avec le groupe $j$ ( $C [i,j] $) avec la proportion de ces contacts qui sont infectieux ($I_j/N_j$) et le risque de transmission par contact ($\beta$).
 
-1. **Convert contact matrix into expected number of secondary cases**
+### Dans les modèles mathématiques
 
-If contacts vary between groups, then the average number of secondary cases won't be equal simply to the average number of contacts multiplied by the probability of transmission-per-contact. This is because the average amount of transmission in each generation of infection isn't just a matter of whom a group came into contact with; it's about whom *their contacts* subsequently come into contact with. The function `r_eff` in the package `{finalsize}` can perform this conversion, taking a contact matrix, demography and proportion susceptible and converting it into an estimate of the average number of secondary cases generated by a typical infectious individual (i.e. the effective reproduction number).
+Considérons le modèle SIR dans lequel les individus sont catégorisés comme étant soit sensibles $S$, infectés mais pas encore infectieux $E$, contagieux $I$, ou guéri $R$. Le schéma ci-dessous montre les processus qui décrivent le flux d'individus entre les différents états $S$, $I$ et $R$ et les paramètres clés de chaque processus.
 
-2. **Convert contact matrix into contact rates**
-
-Whereas a contact matrix gives the average number of contacts that one groups makes with another, epidemic dynamics in different groups depend on the rate at which one group infects another. We therefore need to scale the rate of interaction between different groups (i.e. the number of contacts per unit time) to get the rate of transmission. However, we need to be careful that we are defining transmission to and from each group correctly in any model. Specifically, the entry $(i,j)$ in a mathematical model contact matrix represents contacts of group $i$ with group $j$. But if we want to know the rate at which a group $i$ are getting infected, then we want to multiply the number of contacts of susceptibles in group $i$ ($S_i$) with group $j$ ($C[i,j]$) with the proportion of those contacts that are infectious ($I_j/N_j$), and the transmission risk per contact ($\beta$).
-
-### In mathematical models
-
-Consider the SIR model where individuals are categorized as either susceptible $S$, infected but not yet infectious $E$, infectious $I$ or recovered $R$. The schematic below shows the processes which describe the flow of individuals between the disease states $S$, $I$ and $R$ and the key parameters for each process.
-
-```{r diagram, echo = FALSE, message = FALSE}
+```{r diagram, echo=FALSE, message=FALSE}
 DiagrammeR::grViz("digraph {
 
   # graph statement
@@ -251,44 +240,42 @@ DiagrammeR::grViz("digraph {
 
   # edges
   #######
-  S -> I [label = ' infection \n(transmission rate &beta;)']
-  I -> R [label = ' recovery \n(recovery rate &gamma;)']
+  S -> I [label = ' infection \n(taux de transmission &beta;)']
+  I -> R [label = ' recovery \n(taux de guérison &gamma;)']
 
 }")
 ```
 
-The [differential equations](../learners/reference.md#ordinary) below describe how individuals move from one state to another [(Bjørnstad et al. 2020)](https://doi.org/10.1038/s41592-020-0822-z).
-
-
-$$
-\begin{aligned}
-\frac{dS}{dt} & = - \beta S I /N \\
-\frac{dI}{dt} &= \beta S I /N - \gamma I \\
-\frac{dR}{dt} &=\gamma I \\
-\end{aligned}
-$$
-To add age structure to our model, we need to add additional equations for the infection states $S$, $I$ and $R$ for each age group $i$. If we want to assume that there is heterogeneity in contacts between age groups then we must adapt the transmission term $\beta SI$ to include the contact matrix $C$ as follows :
-
-$$ \beta S_i \sum_j C_{i,j} I_j/N_j. $$ 
-
-Susceptible individuals in age group $i$ become infected dependent on their rate of contact with individuals in each age group. For each disease state ($S$, $E$, $I$ and $R$) and age group ($i$), we have a differential equation describing the rate of change with respect to time.  
+Les [équations différentielles](../learners/reference.md#ordinary) ci-dessous décrivent comment les individus passent d'un état à un autre [(Bjørnstad et al. 2020)](https://doi.org/10.1038/s41592-020-0822-z).
 
 $$
 \begin{aligned}
-\frac{dS_i}{dt} & = - \beta S_i \sum_j C_{i,j} I_j/N_j \\
-\frac{dI_i}{dt} &= \beta S_i\sum_j C_{i,j} I_j/N_j - \gamma I_i \\
-\frac{dR_i}{dt} &=\gamma I_i \\
+\frac{dS}{dt} & = - \beta S I /N \
+\frac{dI}{dt} &= \beta S I /N - \gamma I \
+\frac{dR}{dt} &=\gamma I \
+\end{aligned}
+$$
+Pour ajouter une structure d'âge à notre modèle, nous devons ajouter des équations supplémentaires pour les états d'infection $S$, $I$ et $R$ pour chaque groupe d'âge $i$. Si nous voulons supposer qu'il existe une hétérogénéité dans les contacts entre les groupes d'âge, nous devons adapter le terme de transmission $\beta SI$ pour inclure la matrice de contact $C$ comme suit :
+
+$$ \beta S_i \sum_j C_{i,j} I_j/N_j. $$
+
+Individus susceptibles dans le groupe d'âge $i$ sont infectés en fonction de leur taux de contact avec les individus de chaque groupe d'âge. Pour chaque état ($S$, $E$, $I$ et $R$) et le groupe d'âge ($i$), nous avons une équation différentielle décrivant le taux de changement par rapport au temps.
+
+$$
+\begin{aligned}
+\frac{dS_i}{dt} & = - \beta S_i \sum_j C_{i,j} I_j/N_j \
+\frac{dI_i}{dt} &= \beta S_i\sum_j C_{i,j} I_j/N_j - \gamma I_i \
+\frac{dR_i}{dt} &=\gamma I_i \
 \end{aligned}
 $$
 
+### La normalisation de la matrice des contacts pour garantir la valeur correcte de $R_0$
 
-###  Normalising the contact matrix to ensure the correct value of $R_0$
+Lors de la simulation d'une épidémie, nous voulons souvent nous assurer que le nombre moyen de cas secondaires générés par un individu infectieux typique (c'est-à-dire $R_0$) soit cohérent avec les valeurs connues pour le pathogène que nous analysons. Dans le modèle ci-dessus, nous mettons à l'échelle la matrice des contacts par le facteur $\beta$ pour convertir les données brutes d'interaction en taux de transmission. Mais comment définir la valeur de $\beta$ pour garantir une certaine valeur de $R_0$?
 
-When simulating an epidemic, we often want to ensure that the average number of secondary cases generated by a typical infectious individual (i.e. $R_0$) is consistent with known values for the pathogen we're analysing. In the above model, we scale the contact matrix by the $\beta$ to convert the raw interaction data into a transmission rate. But how do we define the value of $\beta$ to ensure a certain value of $R_0$?
+Plutôt que d'utiliser le nombre brut de contacts, nous pouvons normaliser la matrice des contacts afin de faciliter le travail en termes de $R_0$. En particulier, nous normalisons la matrice en la mettant à l'échelle de sorte que si nous devions calculer le nombre moyen de cas secondaires sur la base de cette matrice normalisée, le résultat serait 1 (en termes mathématiques, nous mettons la matrice à l'échelle de sorte que la plus grande valeur propre soit 1). Cette transformation met à l'échelle les entrées mais préserve leurs valeurs relatives.
 
-Rather than just using the raw number of contacts, we can instead normalise the contact matrix to make it easier to work in terms of $R_0$. In particular, we normalise the matrix by scaling it so that if we were to calculate the average number of secondary cases based on this normalised matrix, the result would be 1 (in mathematical terms, we are scaling the matrix so the largest eigenvalue is 1). This transformation scales the entries but preserves their relative values.
-
-In the case of the above model, we want to define $\beta  C_{i,j}$ so that the model has a specified valued of $R_0$. If the entry of the contact matrix $C[i,j]$ represents the contacts of population $i$ with $j$, it is equivalent to `contact_data$matrix[i,j]`, and the maximum eigenvalue of this matrix represents the typical magnitude of contacts, not typical magnitude of transmission. We must therefore normalise the matrix $C$ so the maximum eigenvalue is one; we call this matrix $C_{normalised}$. Because the rate of recovery is $\gamma$, individuals will be infectious on average for $1/\gamma$ days. So $\beta$ as a model input is calculated from $R_0$, the scaling factor and the value of $\gamma$  (i.e. mathematically we use the fact that the dominant eigenvalue of the matrix $R_0 \times C_{normalised}$ is equal to $\beta / \gamma$). 
+Dans le cas du modèle ci-dessus, nous voulons définir $\beta  C_{i,j}$ afin que le modèle ait une valeur spécifiée de $R_0$. Si l'entrée de la matrice de contact  $C [i,j] $ représente les contacts de la population $i$ avec $j$, il est équivalent à `contact_data$matrix[i,j]` et la valeur propre maximale de cette matrice représente l'ampleur typique des contacts, et non l'ampleur typique de la transmission. Nous devons donc normaliser la matrice $C$ de manière à ce que la valeur propre maximale soit égale à un ; nous appelons cette matrice $C_{normalised}$. Comme le taux de récupération est $\gamma$, les individus seront infectieux en moyenne pendant $1/\gamma$ jours. Ainsi, $\beta$ en tant qu'entrée du modèle est calculée à partir de $R_0$, le facteur d'échelle, et la valeur de $\gamma$  (c'est-à-dire que, mathématiquement, nous utilisons le fait que la valeur propre dominante de la matrice $R_0 \times C_{normalised}$ est égale à $\beta / \gamma$).
 
 ```{r}
 contact_matrix <- t(contact_data$matrix)
@@ -296,8 +283,7 @@ scaling_factor <- 1 / max(eigen(contact_matrix)$values)
 normalised_matrix <- contact_matrix * scaling_factor
 ```
 
-As a result, if we multiply the scaled matrix by $R_0$, then converting to the number of expected secondary cases would give us $R_0$, as required.
-
+Par conséquent, si nous multiplions la matrice mise à l'échelle par $R_0$ puis la multiplions en nombre de cas secondaires attendus, nous obtenons $R_0$, comme requis.
 
 ```{r}
 infectious_period <- 7.0
@@ -307,14 +293,14 @@ transmission_rate <- basic_reproduction * scaling_factor / infectious_period
 max(eigen(basic_reproduction * normalised_matrix)$values)
 ```
 
-
 ::::::::::::::::::::::::::::::::::::: callout
-### Normalisation using `socialmixr`
 
-Normalisation can be performed by the function `contact_matrix()` in `{socialmixr}`. To obtain the normalised matrix we must specify that we want to split out the different components of the contact matrix using the argument `split = TRUE`. Then we can obtain the normalised matrix as follows:
+### Normalisation à l'aide de `socialmixr`
 
-```{r, message = FALSE}
-contact_data_split <- socialmixr::contact_matrix(
+La normalisation peut être effectuée par la fonction `contact_matrix()` dans `{socialmixr}`. Pour obtenir la matrice normalisée, nous devons spécifier que nous voulons séparer les différentes composantes de la matrice de contact à l'aide de l'argument `split = TRUE`. Nous pouvons alors obtenir la matrice normalisée de la manière suivante :
+
+```{r, message=FALSE}
+contact_data_split <- contact_matrix(
   survey = polymod,
   countries = "United Kingdom",
   age.limits = c(0, 20, 40),
@@ -322,48 +308,44 @@ contact_data_split <- socialmixr::contact_matrix(
   split = TRUE
 )
 
-# extract components of the contact matrix
+# extraire les composants de la matrice de contact
 contacts_d <- contact_data_split$contacts
 matrix_a <- contact_data_split$matrix
 demography_n <- contact_data_split$demography$proportion
 
-# calculate normalised matrix
+# calculer la matrice normalisée
 normalised_matrix_split <- contacts_d * matrix_a * demography_n
 ```
 
-
-For details of the different components of the contact matrix see [the package vignette on splitting contact matrices.](https://cran.r-project.org/web/packages/socialmixr/vignettes/socialmixr.html#splitting-contact-matrices)
+Pour plus de détails sur les différentes composantes de la matrice de contact, voir [la vignette du package sur la division des matrices de contact.](https://cran.r-project.org/web/packages/socialmixr/vignettes/socialmixr.html#splitting-contact-matrices)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ::::::::::::::::::::::::::::::::::::: callout
-### Check the dimension of $\beta$
 
-In the SIR model without age structure the rate of contact is part of the transmission rate $\beta$, where as in the age-structured model we have separated out the rate of contact, hence the transmission rate $\beta$ in the age structured model will have a different value.
+### Vérifiez la dimension de $\beta$
+
+Dans le modèle SIR sans structure d'âge, le taux de contact fait partie du taux de transmission. $\beta$ alors que dans le modèle avec structure d'âge, nous avons séparé le taux de contact, et donc le taux de transmission. Pour cette raison, $\beta$ dans le modèle structuré par âge aura une valeur différente.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-We can use contact matrices from `socialmixr` with mathematical models in the R package `{epidemics}`. See the tutorial [Simulating transmission](../episodes/simulating-transmission.md) for examples and an introduction to `epidemics`.
+Nous pouvons utiliser les matrices de contact de `socialmixr` avec des modèles mathématiques dans le package R `{epidemics}`. Regarder le tutoriel [Simuler la transmission](../episodes/simulating-transmission.md) pour des exemples et une introduction à `epidemics`.
 
+### Groupes de contact
 
-### Contact groups
+Dans l'exemple ci-dessus, la dimension de la matrice de contact sera la même que le nombre de groupes d'âge, c'est-à-dire que s'il y a 3 groupes d'âge, la matrice de contact aura 3 lignes et 3 colonnes. Les matrices de contact peuvent être utilisées pour d'autres groupes, à condition que la dimension de la matrice corresponde au nombre de groupes.
 
-In the example above the dimension of the contact matrix will be the same as the number of age groups i.e. if there are 3 age groups then the contact matrix will have 3 rows and 3 columns. Contact matrices can be used for other groups as long as the dimension of the matrix matches the number of groups.
+Par exemple, nous pourrions avoir un méta-modèle de population avec deux zones géographiques. Notre matrice de contact serait alors une matrice 2 x 2 dont les entrées représenteraient les contacts entre les zones géographiques et à l'intérieur de celles-ci.
 
-For example, we might have a meta population model with two geographic areas. Then our contact matrix would be a 2 x 2 matrix with entries representing the contact between and within the geographic areas.
+## Résumé
 
+Dans ce tutoriel, nous avons appris la définition de la matrice de contact, comment elle est estimée et comment accéder aux données de contact social à partir de `socialmixr`. Dans le prochain tutoriel, nous apprendrons à utiliser le package R `{epidemics}` pour générer des trajectoires de maladies à partir de modèles mathématiques avec des matrices de contact provenant de `socialmixr`.
 
+::::::::::::::::::::::::::::::::::::: keypoints
 
-## Summary 
-
-In this tutorial, we have learnt the definition of the contact matrix, how they are estimated and how to access social contact data from `socialmixr`. In the next tutorial, we will learn how to use the R package `{epidemics}` to generate disease trajectories from mathematical models with contact matrices from `socialmixr`.
-
-::::::::::::::::::::::::::::::::::::: keypoints 
-
-- Contact matrices quantify the mixing patterns between different population groups
-- `socialmixr` provides tools to estimate contact matrices from survey data
-- Contact matrices can be used in various epidemiological analyses, from calculating $R_0$ to modeling interventions
-- Proper normalization is crucial when using contact matrices in transmission models
+- Les matrices de contact quantifient les schémas de mélange entre différents groupes de population.
+- `socialmixr` fournit des outils pour estimer les matrices de contact à partir de données d'enquête
+- Les matrices de contact peuvent être utilisées dans diverses analyses épidémiologiques, qu'il s'agisse du du calcul de $R_0$ à la modélisation des interventions.
+- Une normalisation adéquate est cruciale lors de l'utilisation des matrices de contact dans les modèles de transmission.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
