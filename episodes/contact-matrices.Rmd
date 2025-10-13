@@ -21,7 +21,7 @@ webshot::install_phantomjs(force = TRUE)
 
 - Utilisez le package R `socialmixr` pour estimer une matrice de contact
 - Comprendre les différents types d'analyse pour lesquels les matrices de contact peuvent être utilisées
-  ::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 <!-- :::::::::::::::::::::::::::::::::::: : prereq -->
 
