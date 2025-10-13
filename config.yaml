@@ -11,7 +11,7 @@
 carpentry: 'epiverse-trace'
 
 # Overall title for pages.
-title: 'Scenario modelling for outbreak analytics with R'
+title: 'Modélisation de scénarios pour l'analyse des épidémies avec R'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
 created: 
@@ -27,7 +27,7 @@ life_cycle: 'pre-alpha'
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/epiverse-trace/tutorials-late'
+source: 'https://github.com/epiverse-trace/tutorials-late-fr'
 
 # Default branch of your lesson
 branch: 'main'
@@ -60,12 +60,12 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 # Order of episodes in your lesson
 episodes:
 - contact-matrices.Rmd
-- simulating-transmission.Rmd
-- model-choices.Rmd
-- modelling-interventions.Rmd
-- compare-interventions.Rmd
-- vaccine-comparisons.Rmd
-- disease-burden.Rmd
+#- simulating-transmission.Rmd
+#- model-choices.Rmd
+#- modelling-interventions.Rmd
+#- compare-interventions.Rmd
+#- vaccine-comparisons.Rmd
+#- disease-burden.Rmd
 
 # Information for Learners
 learners: 
@@ -84,3 +84,4 @@ profiles:
 
 varnish: epiverse-trace/varnish@epiversetheme
 sandpaper: epiverse-trace/sandpaper@patch-renv-github-bug
+lang: fr
