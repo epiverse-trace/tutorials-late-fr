@@ -60,7 +60,7 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 # Order of episodes in your lesson
 episodes:
 - contact-matrices.Rmd
-#- simulating-transmission.Rmd
+- simulating-transmission.Rmd
 #- model-choices.Rmd
 #- modelling-interventions.Rmd
 #- compare-interventions.Rmd
