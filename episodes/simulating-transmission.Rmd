@@ -312,7 +312,7 @@ d'âge suivantes :
 - âge compris entre 20 et 40 ans,
 - 40 ans et plus.
 
-```{r}
+```r
 polymod <- socialmixr::polymod
 contact_data <- socialmixr::contact_matrix(
   survey = polymod,
