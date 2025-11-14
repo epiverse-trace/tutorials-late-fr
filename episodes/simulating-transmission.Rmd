@@ -80,105 +80,16 @@ library(socialmixr)
 library(tidyverse)
 ```
 
-```{r traj, echo=FALSE, message=FALSE, fig.width=10, eval=TRUE}
-# charger les données de la population en utilisant socialmixr::polymod
-# puis les données de contacts sociaux à l'aide de {socialmixr}
-polymod <- socialmixr::polymod
-contact_data <- socialmixr::contact_matrix(
-  polymod,
-  countries = "United Kingdom",
-  age.limits = c(0, 20, 40),
-  symmetric = TRUE
-)
+:::::::::::::::::::::: instructor
 
-# preparer la matrice des contacts sociaux
-contact_matrix <- t(contact_data$matrix)
+Use slides to introduce the topics of:
 
-# prepare le vecteur de démographie
-demography_vector <- contact_data$demography$population
-names(demography_vector) <- rownames(contact_matrix)
+- Scenario modelling and 
+- Contact matrix.
 
-# configurer les conditions initiales du modèles
-# une personne sur 1 million sont infectées dans le groupe d'âge de 0 à 20 ans
-# aucune personne n'est infectées dans les autres groupes d'âge.
-initial_i <- 1e-6
-initial_conditions_inf <- c(
-  S = 1 - initial_i, E = 0, I = initial_i, R = 0, V = 0
-)
+Then start with the livecoding.
 
-initial_conditions_free <- c(
-  S = 1, E = 0, I = 0, R = 0, V = 0
-)
-
-# combiner les conditions initiales de tous les groupes d'âge
-initial_conditions <- rbind(
-  initial_conditions_inf,
-  initial_conditions_free,
-  initial_conditions_free
-)
-rownames(initial_conditions) <- rownames(contact_matrix)
-
-# preparer la population à modéliser selon les critères établis
-uk_population <- epidemics::population(
-  name = "UK",
-  contact_matrix = contact_matrix,
-  demography_vector = demography_vector,
-  initial_conditions = initial_conditions
-)
-
-# définir la durée des délais
-preinfectious_period <- 3.0
-infectious_period <- 7.0
-basic_reproduction <- 1.46
-
-# calculer les taux en fonction de la durée des délais
-infectiousness_rate <- 1.0 / preinfectious_period
-recovery_rate <- 1.0 / infectious_period
-transmission_rate <- basic_reproduction / infectious_period
-
-# exécuter le modèle épidémique en utilisant la fonction `epidemic()`
-output_plot <- epidemics::model_default(
-  population = uk_population,
-  transmission_rate = transmission_rate,
-  infectiousness_rate = infectiousness_rate,
-  recovery_rate = recovery_rate,
-  time_end = 600,
-  increment = 1.0
-)
-
-output_plot %>%
-  filter(compartment %in% c("exposed", "infectious")) %>%
-  ggplot() +
-  geom_line(
-    aes(
-      x = time,
-      y = value,
-      colour = demography_group,
-      linetype = compartment
-    ),
-    linewidth = 1.2
-  ) +
-  scale_y_continuous(
-    labels = scales::comma
-  ) +
-  scale_colour_brewer(
-    palette = "Dark2",
-    name = "Age group"
-  ) +
-  theme_bw() +
-  labs(
-    x = "Simulation time (days)",
-    linetype = "Compartment",
-    y = "Individuals"
-  )
-```
-
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
-
-À la fin de ce tutoriel, les apprenants devraient être en mesure de reproduire
-l'image ci-dessus sur leur propre ordinateur.
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::
 
 ## Simuler la propagation d'une maladie
 
@@ -258,10 +169,10 @@ rapport au temps.
 
 $$
 \begin{aligned}
-\frac{dS_i}{dt} & = - \beta S_i \sum_j C_{i,j} I_j/N_j \
-\frac{dE_i}{dt} &= \beta S_i\sum_j C_{i,j} I_j/N_j - \alpha E_i \
-\frac{dI_i}{dt} &= \alpha E_i - \gamma I_i \
-\frac{dR_i}{dt} &=\gamma I_i \
+\frac{dS_i}{dt} & = - \beta S_i \sum_j C_{i,j} I_j/N_j \\
+\frac{dE_i}{dt} &= \beta S_i\sum_j C_{i,j} I_j/N_j - \alpha E_i \\
+\frac{dI_i}{dt} &= \alpha E_i - \gamma I_i \\
+\frac{dR_i}{dt} &=\gamma I_i \\
 \end{aligned}
 $$
 
@@ -378,6 +289,19 @@ consultez le tutoriel sur les [matrices de contact]([Simulation de la transmissi
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::: instructor
+
+Make a pause.
+
+Use slides to introduce the topics of:
+
+- Initial conditions and 
+- Population structure.
+
+Then continue with the livecoding.
+
+::::::::::::::::::::::
+
 ### 2\. Conditions initiales
 
 Les conditions initiales sont la proportion d'individus dans chaque état
@@ -453,6 +377,19 @@ uk_population <- population(
   initial_conditions = initial_conditions
 )
 ```
+
+:::::::::::::::::::::: instructor
+
+Make a pause.
+
+Use slides to introduce the topics of:
+
+- Model parameters and 
+- New infections.
+
+Then continue with the livecoding.
+
+::::::::::::::::::::::
 
 ### 4\. Paramètres du modèle
 
@@ -599,6 +536,61 @@ certains événements se produisent au cours d'un mois, l'incrément doit être
 inférieur à un mois.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::: testimonial
+
+**Deux fonctions d'aide dans `{epidemics}`**
+
+Utilisez `epidemics::epidemic_peak()` pour obtenir l'heure et la taille du pic le plus élevé d'un compartiment pour tous les groupes démographiques. Par défaut, cela calculera pour le compartiment infectieux.
+
+```{r}
+epidemics::epidemic_peak(data = output)
+```
+
+Utilisez `epidemics::epidemic_size()` pour obtenir la taille de l'épidémie à n'importe quel stade entre le début et la fin. Celle-ci est calculée comme le nombre d'individus *guéris* de l'infection à ce stade de l'épidémie.
+
+```{r}
+epidemics::epidemic_size(data = output)
+```
+
+Ces fonctions de synthèse peuvent vous aider à obtenir des résultats pertinents pour comparer des scénarios ou pour toute autre analyse en aval.
+
+::::::::::::::::
+
+La figure ci-dessus montre le nombre total ou le nombre cumulé d'individus dans le compartiment infectieux à chaque instant.
+Si vous souhaitez montrer la *charge totale* de la maladie, le compartiment `infectious` est le plus approprié.
+En revanche, si vous souhaitez montrer la *charge quotidienne*, vous pouvez utiliser `epidemics::new_infections()` pour obtenir l'incidence quotidienne.
+
+::::::::::::::::::::::: spoiler
+
+Notez que le nombre de nouveaux cas infectés à chaque instant (comme dans la figure ci-dessous) est inférieur au nombre cumulé de personnes infectieuses à chaque instant (comme dans la figure ci-dessus).
+
+```{r}
+# New infections
+newinfections_bygroup <- epidemics::new_infections(data = output)
+
+# Visualise the spread of the epidemic in terms of new infections
+newinfections_bygroup %>%
+  ggplot(aes(x = time, y = new_infections, colour = demography_group)) +
+  geom_line() +
+  scale_y_continuous(
+    breaks = scales::breaks_pretty(n = 5),
+    labels = scales::comma
+  ) +
+  theme_bw()
+```
+
+:::::::::::::::::::::::
+
+:::::::::::::::::::::: instructor
+
+Stop the livecoding.
+
+Suggest learners to read the rest of the episode.
+
+Return to slides.
+
+::::::::::::::::::::::
 
 ## Prise en compte de l'incertitude
 
