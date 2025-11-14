@@ -25,6 +25,8 @@ exercises: 30
 
 ::::::::::::::::::::::::::::::::::::: prereq
 
+- Compléter le tutoriel sur [Matrices de contact](../episodes/contact-matrices.md).
+
 Les apprenants doivent se familiariser avec les concepts suivants pour mieux
 comprendre les notions abordées dans ce cours.
 
@@ -32,7 +34,23 @@ comprendre les notions abordées dans ce cours.
 
 **Théorie des épidémies** : [Transmission](https://doi.org/10.1155/2011/267049),
 [Nombre de reproduction](https://doi.org/10.3201/eid2501.171901).
+
+**R packages installés**: `{epidemics}`, `{socialmixr}`, `{tidyverse}`.
+
 :::::::::::::::::::::::::::::::::
+
+:::::::::::::: spoiler
+
+Installer les packages si elles ne le sont pas déjà:
+
+```r
+if (!base::require("pak")) install.packages("pak")
+pak::pak(c("epidemics", "socialmixr", "tidyverse"))
+```
+
+Si vous recevez un message d'erreur, rendez-vous sur la [page principale de configuration](../learners/setup.md#configuration-des-logiciels).
+
+::::::::::
 
 ## Introduction
 
@@ -59,14 +77,16 @@ library(socialmixr)
 library(tidyverse)
 ```
 
-<img src="fig/simulating-transmission-rendered-traj-1.png" style="display: block; margin: auto;" />
+:::::::::::::::::::::: instructor
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
+Use slides to introduce the topics of:
 
-À la fin de ce tutoriel, les apprenants devraient être en mesure de reproduire
-l'image ci-dessus sur leur propre ordinateur.
+- Scenario modelling and 
+- Contact matrix.
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Then start with the livecoding.
+
+::::::::::::::::::::::
 
 ## Simuler la propagation d'une maladie
 
@@ -118,10 +138,10 @@ rapport au temps.
 
 $$
 \begin{aligned}
-\frac{dS_i}{dt} & = - \beta S_i \sum_j C_{i,j} I_j/N_j \
-\frac{dE_i}{dt} &= \beta S_i\sum_j C_{i,j} I_j/N_j - \alpha E_i \
-\frac{dI_i}{dt} &= \alpha E_i - \gamma I_i \
-\frac{dR_i}{dt} &=\gamma I_i \
+\frac{dS_i}{dt} & = - \beta S_i \sum_j C_{i,j} I_j/N_j \\
+\frac{dE_i}{dt} &= \beta S_i\sum_j C_{i,j} I_j/N_j - \alpha E_i \\
+\frac{dI_i}{dt} &= \alpha E_i - \gamma I_i \\
+\frac{dR_i}{dt} &=\gamma I_i \\
 \end{aligned}
 $$
 
@@ -182,27 +202,20 @@ matrice de contacts estimée à partir des données de l'enquête POLYMOD
 
 ## Charger les données de contact et de démographie
 
-En utilisant la librairie `{socialmixr}`, exécutez les lignes de code R
-suivantes pour obtenir la matrice de contact du Royaume-Uni pour les tranches
+En utilisant la librairie `{socialmixr}`, obtenir la matrice de contact du Royaume-Uni pour les tranches
 d'âge suivantes :
 
 - âge entre 0 et 20 ans,
 - âge compris entre 20 et 40 ans,
 - 40 ans et plus.
 
-```r
-polymod <- socialmixr::polymod
-contact_data <- socialmixr::contact_matrix(
-  survey = polymod,
-  countries = "United Kingdom",
-  age.limits = c(0, 20, 40),
-  symmetric = TRUE
-)
+Utilisez le sondage disponible sur `socialmixr::polymod`.
 
-# preparer la matrice de contact sociaux
-contact_matrix <- t(contact_data$matrix)
-contact_matrix
-```
+:::::::::::::: hint
+
+- Compléter le tutoriel sur [Matrices de contact](../episodes/contact-matrices.md).
+
+::::::::::::::
 
 :::::::::::::::::::::::: solution
 
@@ -234,6 +247,19 @@ matrice de contact avant de la passer à la fonction `population()` (voir sectio
 consultez le tutoriel sur les [matrices de contact]([Simulation de la transmission](../episodes/contact-matrices.md)) .
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::: instructor
+
+Make a pause.
+
+Use slides to introduce the topics of:
+
+- Initial conditions and 
+- Population structure.
+
+Then continue with the livecoding.
+
+::::::::::::::::::::::
 
 ### 2\. Conditions initiales
 
@@ -327,6 +353,19 @@ uk_population <- population(
   initial_conditions = initial_conditions
 )
 ```
+
+:::::::::::::::::::::: instructor
+
+Make a pause.
+
+Use slides to introduce the topics of:
+
+- Model parameters and 
+- New infections.
+
+Then continue with the livecoding.
+
+::::::::::::::::::::::
 
 ### 4\. Paramètres du modèle
 
@@ -490,6 +529,78 @@ certains événements se produisent au cours d'un mois, l'incrément doit être
 inférieur à un mois.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::: testimonial
+
+**Deux fonctions d'aide dans `{epidemics}`**
+
+Utilisez `epidemics::epidemic_peak()` pour obtenir l'heure et la taille du pic le plus élevé d'un compartiment pour tous les groupes démographiques. Par défaut, cela calculera pour le compartiment infectieux.
+
+
+``` r
+epidemics::epidemic_peak(data = output)
+```
+
+``` output
+   demography_group compartment  time    value
+             <char>      <char> <num>    <num>
+1:           [0,20)  infectious   315 651944.3
+2:          [20,40)  infectious   319 625863.8
+3:              40+  infectious   322 858259.1
+```
+
+Utilisez `epidemics::epidemic_size()` pour obtenir la taille de l'épidémie à n'importe quel stade entre le début et la fin. Celle-ci est calculée comme le nombre d'individus *guéris* de l'infection à ce stade de l'épidémie.
+
+
+``` r
+epidemics::epidemic_size(data = output)
+```
+
+``` output
+[1]  9285873  9040679 12540088
+```
+
+Ces fonctions de synthèse peuvent vous aider à obtenir des résultats pertinents pour comparer des scénarios ou pour toute autre analyse en aval.
+
+::::::::::::::::
+
+La figure ci-dessus montre le nombre total ou le nombre cumulé d'individus dans le compartiment infectieux à chaque instant.
+Si vous souhaitez montrer la *charge totale* de la maladie, le compartiment `infectious` est le plus approprié.
+En revanche, si vous souhaitez montrer la *charge quotidienne*, vous pouvez utiliser `epidemics::new_infections()` pour obtenir l'incidence quotidienne.
+
+::::::::::::::::::::::: spoiler
+
+Notez que le nombre de nouveaux cas infectés à chaque instant (comme dans la figure ci-dessous) est inférieur au nombre cumulé de personnes infectieuses à chaque instant (comme dans la figure ci-dessus).
+
+
+``` r
+# New infections
+newinfections_bygroup <- epidemics::new_infections(data = output)
+
+# Visualise the spread of the epidemic in terms of new infections
+newinfections_bygroup %>%
+  ggplot(aes(x = time, y = new_infections, colour = demography_group)) +
+  geom_line() +
+  scale_y_continuous(
+    breaks = scales::breaks_pretty(n = 5),
+    labels = scales::comma
+  ) +
+  theme_bw()
+```
+
+<img src="fig/simulating-transmission-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+
+:::::::::::::::::::::::
+
+:::::::::::::::::::::: instructor
+
+Stop the livecoding.
+
+Suggest learners to read the rest of the episode.
+
+Return to slides.
+
+::::::::::::::::::::::
 
 ## Prise en compte de l'incertitude
 
