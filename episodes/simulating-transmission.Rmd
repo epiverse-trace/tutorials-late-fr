@@ -47,8 +47,8 @@ comprendre les notions abordées dans ce cours.
 
 Installer les packages si elles ne le sont pas déjà:
 
-```{r, eval = FALSE}
-if(!require("pak")) install.packages("pak")
+```r
+if (!base::require("pak")) install.packages("pak")
 pak::pak(c("epidemics", "socialmixr", "tidyverse"))
 ```
 
@@ -322,40 +322,39 @@ matrice de contacts estimée à partir des données de l'enquête POLYMOD
 
 ## Charger les données de contact et de démographie
 
-En utilisant la librairie `{socialmixr}`, exécutez les lignes de code R
-suivantes pour obtenir la matrice de contact du Royaume-Uni pour les tranches
+En utilisant la librairie `{socialmixr}`, obtenir la matrice de contact du Royaume-Uni pour les tranches
 d'âge suivantes :
 
 - âge entre 0 et 20 ans,
 - âge compris entre 20 et 40 ans,
 - 40 ans et plus.
 
-```r
-polymod <- socialmixr::polymod
-contact_data <- socialmixr::contact_matrix(
-  survey = polymod,
-  countries = "United Kingdom",
-  age.limits = c(0, 20, 40),
-  symmetric = TRUE
-)
+Utilisez le sondage disponible sur `socialmixr::polymod`.
 
-# preparer la matrice de contact sociaux
-contact_matrix <- t(contact_data$matrix)
-contact_matrix
-```
+:::::::::::::: hint
+
+- Compléter le tutoriel sur [Matrices de contact](../episodes/contact-matrices.md).
+
+::::::::::::::
 
 :::::::::::::::::::::::: solution
 
 ```{r polymod_uk, echo=FALSE, message=FALSE}
+# Access the contact survey data
 polymod <- socialmixr::polymod
+
+# Generate the contact matrix
 contact_data <- socialmixr::contact_matrix(
   polymod,
   countries = "United Kingdom",
   age.limits = c(0, 20, 40),
   symmetric = TRUE
 )
+
 # prepare contact matrix
 contact_matrix <- t(contact_data$matrix)
+
+# print
 contact_matrix
 ```
 
