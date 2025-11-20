@@ -348,7 +348,7 @@ Nous combinons les trois vecteurs de conditions initiales en une seule matrice,
 ```{r initial_conditions}
 # combiner les conditions initiales dans un objet de classe matricielle
 initial_conditions <- rbind(
-  initial_conditions_inf, # groupe d'age 1
+  initial_conditions_inf, # groupe d'age 1 (seul groupe infectieux)
   initial_conditions_free, # groupe d'age 2
   initial_conditions_free # groupe d'age 3
 )
