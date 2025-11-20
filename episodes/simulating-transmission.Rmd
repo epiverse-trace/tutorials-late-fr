@@ -250,7 +250,7 @@ Utilisez le sondage disponible sur `socialmixr::polymod`.
 
 :::::::::::::::::::::::: solution
 
-```{r polymod_uk, echo=FALSE, message=FALSE}
+```{r polymod_uk, echo=TRUE, message=FALSE}
 # Access the contact survey data
 polymod <- socialmixr::polymod
 
