@@ -381,7 +381,7 @@ reproduction</a>.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Afficher les détails </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>Installer les packages si elles ne le sont pas déjà:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -560,7 +560,7 @@ matrice de contact du Royaume-Uni pour les tranches d’âge suivantes
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Donner un indice </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <ul><li>Compléter le tutoriel sur <a href="contact-matrices.html">Matrices
 de contact</a>.</li>
@@ -573,8 +573,29 @@ de contact</a>.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Montrer la solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Access the contact survey data</span></span>
+<span><span class="va">polymod</span> <span class="op">&lt;-</span> <span class="fu">socialmixr</span><span class="fu">::</span><span class="va">polymod</span></span>
+<span></span>
+<span><span class="co"># Generate the contact matrix</span></span>
+<span><span class="va">contact_data</span> <span class="op">&lt;-</span> <span class="fu">socialmixr</span><span class="fu">::</span><span class="fu">contact_matrix</span><span class="op">(</span></span>
+<span>  <span class="va">polymod</span>,</span>
+<span>  countries <span class="op">=</span> <span class="st">"United Kingdom"</span>,</span>
+<span>  age.limits <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="fl">40</span><span class="op">)</span>,</span>
+<span>  symmetric <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># prepare contact matrix</span></span>
+<span><span class="va">socialcontact_matrix</span> <span class="op">&lt;-</span> <span class="fu">t</span><span class="op">(</span><span class="va">contact_data</span><span class="op">$</span><span class="va">matrix</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># print</span></span>
+<span><span class="va">socialcontact_matrix</span></span></code></pre>
+</div>
 <div class="codewrapper">
 <h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -590,7 +611,7 @@ contact.age.group   [0,20)  [20,40)      40+
 de contacts (<code>contact_data$matrix</code>) multiplié par le nombre
 d’individus dans le groupe <span class="math inline">\(i\)</span>
 (<code>contact_data$demography$population</code>).</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -646,7 +667,7 @@ d’infection.</p>
 <p>Les conditions initiales dans la première catégorie d’âge sont les
 suivantes <span class="math inline">\(S(0)=1-\frac{1}{1,000,000}\)</span>, <span class="math inline">\(E(0) =0\)</span>, <span class="math inline">\(I(0)=\frac{1}{1,000,000}\)</span>, <span class="math inline">\(R(0)=0\)</span>. Il est spécifié sous la forme
 d’un vecteur comme suit :</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -665,7 +686,7 @@ d’un vecteur comme suit :</p>
 initiales sont les suivantes <span class="math inline">\(S(0)=1\)</span>, <span class="math inline">\(E(0)
 =0\)</span>, <span class="math inline">\(I(0)=0\)</span>, <span class="math inline">\(R(0)=0\)</span>. Nous spécifions ceci comme
 suit,</p>
-<div class="codewrapper sourceCode" id="cb7">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -675,7 +696,7 @@ suit,</p>
 </div>
 <p>Nous combinons les trois vecteurs de conditions initiales en une
 seule matrice,</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -709,7 +730,7 @@ d’âge de la population d’intéret. Dans cet exemple, nous pouvons
 extraire les données démographiques du vecteur <code>contact_data</code>
 que nous avons obtenu à l’aide de la librairie
 <a href="https://github.com/epiforecasts/socialmixr" class="external-link">socialmixr</a>.</population></p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -732,7 +753,7 @@ librairie <code>{epidemics}</code>, nous utiliserons la fonction
 <code>epidemics::population()</code> en spécifiant le nom du pays, la
 matrice de contact, le vecteur démographique et les conditions
 initiales.</population></p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -769,7 +790,7 @@ R_0 \gamma\)</span>,</li>
 caractéristiques suivantes <span class="math inline">\(R_0=1.46\)</span>
 avec une période pré-infectieuse de 3 jours et une période infectieuse
 de 7 jours. Nos données d’entrée seront donc les suivantes</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -778,7 +799,7 @@ de 7 jours. Nos données d’entrée seront donc les suivantes</p>
 <span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fl">7.0</span></span>
 <span><span class="va">basic_reproduction</span> <span class="op">&lt;-</span> <span class="fl">1.46</span></span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -834,7 +855,7 @@ et modèles d’EDO</a> de la vignette “Design principles”.</p>
 <code>{epidemics}</code>.</p>
 <p>Précisons <code>time_end=600</code> pour exécuter le modèle pendant
 600 jours.</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -873,7 +894,7 @@ compartiment de chaque groupe d’âge au cours du temps. Nous pouvons
 visualiser uniquement les individus infectieux (ceux qui se trouvent
 dans le compartiment <span class="math inline">\(I\)</span>) au cours du
 temps.</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -938,7 +959,7 @@ l’incrément doit être inférieur à un mois.</li>
 et la taille du pic le plus élevé d’un compartiment pour tous les
 groupes démographiques. Par défaut, cela calculera pour le compartiment
 infectieux.</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -957,7 +978,7 @@ infectieux.</p>
 taille de l’épidémie à n’importe quel stade entre le début et la fin.
 Celle-ci est calculée comme le nombre d’individus <em>guéris</em> de
 l’infection à ce stade de l’épidémie.</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb21">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -986,12 +1007,12 @@ l’incidence quotidienne.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
   <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Afficher les détails </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
 <div class="accordion-body">
 <p>Notez que le nombre de nouveaux cas infectés à chaque instant (comme
 dans la figure ci-dessous) est inférieur au nombre cumulé de personnes
 infectieuses à chaque instant (comme dans la figure ci-dessus).</p>
-<div class="codewrapper sourceCode" id="cb22">
+<div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1037,7 +1058,7 @@ l’incertitude, nous exécuterons le modèle pour différentes valeurs de
 faire sont les suivantes :</p>
 <ol style="list-style-type: decimal"><li>Obtenir 100 valeurs aléatoires de <span class="math inline">\(R_0\)</span> à partir d’une distribution
 normale.</li>
-</ol><div class="codewrapper sourceCode" id="cb23">
+</ol><div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1057,7 +1078,7 @@ normale.</li>
 <span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="va">r_samples</span> <span class="op">/</span> <span class="va">infectious_period</span></span></code></pre>
 </div>
 <ol start="2" style="list-style-type: decimal"><li>Exécutez le modèle 100 fois en variant <span class="math inline">\(R_0\)</span> à chaque itération</li>
-</ol><div class="codewrapper sourceCode" id="cb24">
+</ol><div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1073,7 +1094,7 @@ normale.</li>
 <ol start="3" style="list-style-type: decimal"><li>Calculez la moyenne et les quantiles à 95 % du nombre d’individus
 infectieux pour chaque simulation du modèle et visualisez les
 résultats.</li>
-</ol><div class="codewrapper sourceCode" id="cb25">
+</ol><div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
