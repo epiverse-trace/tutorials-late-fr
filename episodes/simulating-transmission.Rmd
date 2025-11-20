@@ -263,10 +263,10 @@ contact_data <- socialmixr::contact_matrix(
 )
 
 # prepare contact matrix
-contact_matrix <- t(contact_data$matrix)
+socialcontact_matrix <- t(contact_data$matrix)
 
 # print
-contact_matrix
+socialcontact_matrix
 ```
 
 N'oubliez pas que la matrice satisfait à la condition `symmetric = TRUE` au niveau du nombre total de contacts.
@@ -355,7 +355,7 @@ initial_conditions <- rbind(
 
 # utiliser la matrice de contact pour renommer les noms de lignes de la matrice
 # des conditions initiales
-rownames(initial_conditions) <- rownames(contact_matrix)
+rownames(initial_conditions) <- rownames(socialcontact_matrix)
 initial_conditions
 ```
 
@@ -374,7 +374,7 @@ demography_vector <- contact_data$demography$population
 
 # utiliser la matrice de contact pour renommer les noms
 # des lignes du vecteur démographique
-names(demography_vector) <- rownames(contact_matrix)
+names(demography_vector) <- rownames(socialcontact_matrix)
 demography_vector
 ```
 
@@ -388,7 +388,7 @@ library(epidemics)
 
 uk_population <- epidemics::population(
   name = "UK",
-  contact_matrix = contact_matrix,
+  contact_matrix = socialcontact_matrix,
   demography_vector = demography_vector,
   initial_conditions = initial_conditions
 )
