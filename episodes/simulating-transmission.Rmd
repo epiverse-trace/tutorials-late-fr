@@ -269,6 +269,14 @@ contact_matrix <- t(contact_data$matrix)
 contact_matrix
 ```
 
+N'oubliez pas que la matrice satisfait à la condition `symmetric = TRUE` au niveau du nombre total de contacts.
+
+Le nombre total de contacts entre les groupes $i$ et $j$ est calculé comme étant le nombre moyen de contacts (`contact_data$matrix`) multiplié par le nombre d'individus dans le groupe $i$ (`contact_data$demography$population`).
+
+```{r}
+contact_data$matrix * contact_data$demography$population
+```
+
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
