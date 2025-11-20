@@ -220,6 +220,25 @@ Utilisez le sondage disponible sur `socialmixr::polymod`.
 :::::::::::::::::::::::: solution
 
 
+``` r
+# Access the contact survey data
+polymod <- socialmixr::polymod
+
+# Generate the contact matrix
+contact_data <- socialmixr::contact_matrix(
+  polymod,
+  countries = "United Kingdom",
+  age.limits = c(0, 20, 40),
+  symmetric = TRUE
+)
+
+# prepare contact matrix
+socialcontact_matrix <- t(contact_data$matrix)
+
+# print
+socialcontact_matrix
+```
+
 ``` output
                  age.group
 contact.age.group   [0,20)  [20,40)      40+
