@@ -323,11 +323,15 @@ Les conditions initiales dans la première catégorie d'âge sont les suivantes 
 Il est spécifié sous la forme d'un vecteur comme suit :
 
 ```{r initial_inf}
+# 1 in 1,000,000 is equivalent to 1e-6
 initial_i <- 1e-6
 initial_conditions_inf <- c(
   S = 1 - initial_i, E = 0, I = initial_i, R = 0, V = 0
 )
 ```
+
+Notez que R utilise la notation scientifique `e`, où `e` vous indique de multiplier le nombre de base par 10 élevé à la puissance indiquée ([DataKwery, 2020](https://www.datakwery.com/post/2020-07-11-scientific-notation-in-r/)).
+L'expression $1 \times 10^{-6}$ équivaut à `1e-6`.
 
 Pour les catégories d'âge exemptes d'infection, les conditions initiales sont
 les suivantes $S(0)=1$, $E(0) =0$, $I(0)=0$, $R(0)=0$. Nous spécifions ceci
