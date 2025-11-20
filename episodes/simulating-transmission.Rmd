@@ -291,7 +291,7 @@ fonctions de la librairies `{epidemics}`.
 
 Dans le cadre de `{epidemics}` la normalisation de la matrice de contact se fait
 durant l'appel de la fonction, nous n'avons donc pas besoin de normaliser la
-matrice de contact avant de la passer à la fonction `population()` (voir section
+matrice de contact avant de la passer à la fonction `epidemics::population()` (voir section
 3. Structure de la population). Pour plus de détails sur la normalisation,
 consultez le tutoriel sur les [matrices de contact]([Simulation de la transmission](../episodes/contact-matrices.md)) .
 
@@ -346,7 +346,7 @@ initial_conditions_free <- c(
 Nous combinons les trois vecteurs de conditions initiales en une seule matrice,
 
 ```{r initial_conditions}
-# combiner les conditions initiales
+# combiner les conditions initiales dans un objet de classe matricielle
 initial_conditions <- rbind(
   initial_conditions_inf, # groupe d'age 1
   initial_conditions_free, # groupe d'age 2
@@ -369,20 +369,24 @@ vecteur `contact_data` que nous avons obtenu à l'aide de la librairie
 `{socialmixr}`.
 
 ```{r demography}
+# extraire le vecteur démographique
 demography_vector <- contact_data$demography$population
+
+# utiliser la matrice de contact pour renommer les noms
+# des lignes du vecteur démographique
 names(demography_vector) <- rownames(contact_matrix)
 demography_vector
 ```
 
 Pour créer notre objet de classe <population> à partir de la librairie
-`{epidemics}`, nous utiliserons la fonction `population()` en spécifiant le nom
+`{epidemics}`, nous utiliserons la fonction `epidemics::population()` en spécifiant le nom
 du pays, la matrice de contact, le vecteur démographique et les conditions
 initiales.
 
 ```{r population}
 library(epidemics)
 
-uk_population <- population(
+uk_population <- epidemics::population(
   name = "UK",
   contact_matrix = contact_matrix,
   demography_vector = demography_vector,
@@ -472,12 +476,12 @@ lire la section sur [Systèmes et modèles d'EDO](https://epiverse-trace.github.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 Nous sommes maintenant prêts à exécuter notre modèle en utilisant
-`model_default()` de la librairies `{epidemics}`.
+`epidemics::model_default()` de la librairies `{epidemics}`.
 
 Précisons `time_end=600` pour exécuter le modèle pendant 600 jours.
 
 ```{r run_model}
-output <- model_default(
+output <- epidemics::model_default(
   # population
   population = uk_population,
   # les taux
@@ -645,7 +649,7 @@ beta <- r_samples / infectious_period
 2. Exécutez le modèle 100 fois en variant $R_0$ à chaque itération
 
 ```{r samples}
-output_samples <- model_default(
+output_samples <- epidemics::model_default(
   population = uk_population,
   transmission_rate = beta,
   infectiousness_rate = infectiousness_rate,
