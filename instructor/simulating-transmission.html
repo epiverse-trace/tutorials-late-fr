@@ -309,7 +309,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Simulation de la transmission</h1>
-        <p>Dernière mise à jour le 2025-11-16 |
+        <p>Dernière mise à jour le 2025-11-20 |
 
         <a href="https://github.com/epiverse-trace/tutorials-late-fr/edit/main/episodes/simulating-transmission.Rmd" class="external-link">Modifier cette page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -391,7 +391,7 @@ reproduction</a>.</p>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu">base</span><span class="fu">::</span><span class="kw">require</span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span><span class="op">)</span> <span class="fu">install.packages</span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="fu">c</span><span class="op">(</span><span class="st">"epiverse-trace/epidemics"</span>, <span class="st">"socialmixr"</span>, <span class="st">"tidyverse"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="fu">c</span><span class="op">(</span><span class="st">"epiverse-trace/epidemics"</span>, <span class="st">"socialmixr"</span>, <span class="st">"scales"</span>, <span class="st">"tidyverse"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <p>Si vous recevez un message d’erreur, rendez-vous sur la <a href="index.html#configuration-des-logiciels">page principale de
 configuration</a>.</p>
@@ -600,6 +600,27 @@ contact.age.group   [0,20)  [20,40)      40+
           [20,40) 3.120220 4.854839 2.624868
           40+     3.063895 4.599893 5.005571</code></pre>
 </div>
+<p>N’oubliez pas que la matrice satisfait à la condition
+<code>symmetric = TRUE</code> au niveau du nombre total de contacts.</p>
+<p>Le nombre total de contacts entre les groupes <span class="math inline">\(i\)</span> et <span class="math inline">\(j\)</span> est calculé comme étant le nombre moyen
+de contacts (<code>contact_data$matrix</code>) multiplié par le nombre
+d’individus dans le groupe <span class="math inline">\(i\)</span>
+(<code>contact_data$demography$population</code>).</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">contact_data</span><span class="op">$</span><span class="va">matrix</span> <span class="op">*</span> <span class="va">contact_data</span><span class="op">$</span><span class="va">demography</span><span class="op">$</span><span class="va">population</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">SORTIE<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>         contact.age.group
+age.group    [0,20)  [20,40)       40+
+  [0,20)  116672620 46177038  45343471
+  [20,40)  46177038 80232531  76019216
+  40+      45343471 76019216 144967139</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -619,9 +640,9 @@ pour chaque groupe d’âge. Les matrices de contact peuvent être chargées
 <p>Dans le cadre de <code>{epidemics}</code> la normalisation de la
 matrice de contact se fait durant l’appel de la fonction, nous n’avons
 donc pas besoin de normaliser la matrice de contact avant de la passer à
-la fonction <code>population()</code> (voir section 3. Structure de la
-population). Pour plus de détails sur la normalisation, consultez le
-tutoriel sur les <a href="../%5BSimulation%20de%20la%20transmission%5D(../episodes/contact-matrices.md)">matrices
+la fonction <code>epidemics::population()</code> (voir section 3.
+Structure de la population). Pour plus de détails sur la normalisation,
+consultez le tutoriel sur les <a href="../%5BSimulation%20de%20la%20transmission%5D(../episodes/contact-matrices.md)">matrices
 de contact</a> .</p>
 </div>
 </div>
@@ -656,20 +677,26 @@ d’infection.</p>
 <p>Les conditions initiales dans la première catégorie d’âge sont les
 suivantes <span class="math inline">\(S(0)=1-\frac{1}{1,000,000}\)</span>, <span class="math inline">\(E(0) =0\)</span>, <span class="math inline">\(I(0)=\frac{1}{1,000,000}\)</span>, <span class="math inline">\(R(0)=0\)</span>. Il est spécifié sous la forme
 d’un vecteur comme suit :</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">initial_i</span> <span class="op">&lt;-</span> <span class="fl">1e-6</span></span>
+<code class="sourceCode R"><span><span class="co"># 1 in 1,000,000 is equivalent to 1e-6</span></span>
+<span><span class="va">initial_i</span> <span class="op">&lt;-</span> <span class="fl">1e-6</span></span>
 <span><span class="va">initial_conditions_inf</span> <span class="op">&lt;-</span> <span class="fu">c</span><span class="op">(</span></span>
 <span>  S <span class="op">=</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">initial_i</span>, E <span class="op">=</span> <span class="fl">0</span>, I <span class="op">=</span> <span class="va">initial_i</span>, R <span class="op">=</span> <span class="fl">0</span>, V <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span></code></pre>
 </div>
+<p>Notez que R utilise la notation scientifique <code>e</code>, où
+<code>e</code> vous indique de multiplier le nombre de base par 10 élevé
+à la puissance indiquée (<a href="https://www.datakwery.com/post/2020-07-11-scientific-notation-in-r/" class="external-link">DataKwery,
+2020</a>). L’expression <span class="math inline">\(1 \times
+10^{-6}\)</span> équivaut à <code>1e-6</code>.</p>
 <p>Pour les catégories d’âge exemptes d’infection, les conditions
 initiales sont les suivantes <span class="math inline">\(S(0)=1\)</span>, <span class="math inline">\(E(0)
 =0\)</span>, <span class="math inline">\(I(0)=0\)</span>, <span class="math inline">\(R(0)=0\)</span>. Nous spécifions ceci comme
 suit,</p>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -679,20 +706,20 @@ suit,</p>
 </div>
 <p>Nous combinons les trois vecteurs de conditions initiales en une
 seule matrice,</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># combiner les conditions initiales</span></span>
+<code class="sourceCode R"><span><span class="co"># combiner les conditions initiales dans un objet de classe matricielle</span></span>
 <span><span class="va">initial_conditions</span> <span class="op">&lt;-</span> <span class="fu">rbind</span><span class="op">(</span></span>
-<span>  <span class="va">initial_conditions_inf</span>, <span class="co"># groupe d'age 1</span></span>
+<span>  <span class="va">initial_conditions_inf</span>, <span class="co"># groupe d'age 1 (seul groupe infectieux)</span></span>
 <span>  <span class="va">initial_conditions_free</span>, <span class="co"># groupe d'age 2</span></span>
 <span>  <span class="va">initial_conditions_free</span> <span class="co"># groupe d'age 3</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># utiliser la matrice de contact pour renommer les noms de lignes de la matrice</span></span>
 <span><span class="co"># des conditions initiales</span></span>
-<span><span class="fu">rownames</span><span class="op">(</span><span class="va">initial_conditions</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">rownames</span><span class="op">(</span><span class="va">contact_matrix</span><span class="op">)</span></span>
+<span><span class="fu">rownames</span><span class="op">(</span><span class="va">initial_conditions</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">rownames</span><span class="op">(</span><span class="va">socialcontact_matrix</span><span class="op">)</span></span>
 <span><span class="va">initial_conditions</span></span></code></pre>
 </div>
 <div class="codewrapper">
@@ -713,12 +740,16 @@ d’âge de la population d’intéret. Dans cet exemple, nous pouvons
 extraire les données démographiques du vecteur <code>contact_data</code>
 que nous avons obtenu à l’aide de la librairie
 <a href="https://github.com/epiforecasts/socialmixr" class="external-link">socialmixr</a>.</population></p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">demography_vector</span> <span class="op">&lt;-</span> <span class="va">contact_data</span><span class="op">$</span><span class="va">demography</span><span class="op">$</span><span class="va">population</span></span>
-<span><span class="fu">names</span><span class="op">(</span><span class="va">demography_vector</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">rownames</span><span class="op">(</span><span class="va">contact_matrix</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># extraire le vecteur démographique</span></span>
+<span><span class="va">demography_vector</span> <span class="op">&lt;-</span> <span class="va">contact_data</span><span class="op">$</span><span class="va">demography</span><span class="op">$</span><span class="va">population</span></span>
+<span></span>
+<span><span class="co"># utiliser la matrice de contact pour renommer les noms</span></span>
+<span><span class="co"># des lignes du vecteur démographique</span></span>
+<span><span class="fu">names</span><span class="op">(</span><span class="va">demography_vector</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu">rownames</span><span class="op">(</span><span class="va">socialcontact_matrix</span><span class="op">)</span></span>
 <span><span class="va">demography_vector</span></span></code></pre>
 </div>
 <div class="codewrapper">
@@ -729,17 +760,18 @@ que nous avons obtenu à l’aide de la librairie
 </div>
 <p>Pour créer notre objet de classe <population> à partir de la
 librairie <code>{epidemics}</code>, nous utiliserons la fonction
-<code>population()</code> en spécifiant le nom du pays, la matrice de
-contact, le vecteur démographique et les conditions initiales.</population></p>
-<div class="codewrapper sourceCode" id="cb10">
+<code>epidemics::population()</code> en spécifiant le nom du pays, la
+matrice de contact, le vecteur démographique et les conditions
+initiales.</population></p>
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">epidemics</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">uk_population</span> <span class="op">&lt;-</span> <span class="fu">population</span><span class="op">(</span></span>
+<span><span class="va">uk_population</span> <span class="op">&lt;-</span> <span class="fu">epidemics</span><span class="fu">::</span><span class="fu">population</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="st">"UK"</span>,</span>
-<span>  contact_matrix <span class="op">=</span> <span class="va">contact_matrix</span>,</span>
+<span>  contact_matrix <span class="op">=</span> <span class="va">socialcontact_matrix</span>,</span>
 <span>  demography_vector <span class="op">=</span> <span class="va">demography_vector</span>,</span>
 <span>  initial_conditions <span class="op">=</span> <span class="va">initial_conditions</span></span>
 <span><span class="op">)</span></span></code></pre>
@@ -783,7 +815,7 @@ R_0 \gamma\)</span>,</li>
 caractéristiques suivantes <span class="math inline">\(R_0=1.46\)</span>
 avec une période pré-infectieuse de 3 jours et une période infectieuse
 de 7 jours. Nos données d’entrée seront donc les suivantes</p>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -792,7 +824,7 @@ de 7 jours. Nos données d’entrée seront donc les suivantes</p>
 <span><span class="va">infectious_period</span> <span class="op">&lt;-</span> <span class="fl">7.0</span></span>
 <span><span class="va">basic_reproduction</span> <span class="op">&lt;-</span> <span class="fl">1.46</span></span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -844,15 +876,15 @@ et modèles d’EDO</a> de la vignette “Design principles”.</p>
 </div>
 </div>
 <p>Nous sommes maintenant prêts à exécuter notre modèle en utilisant
-<code>model_default()</code> de la librairies
+<code>epidemics::model_default()</code> de la librairies
 <code>{epidemics}</code>.</p>
 <p>Précisons <code>time_end=600</code> pour exécuter le modèle pendant
 600 jours.</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">model_default</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">epidemics</span><span class="fu">::</span><span class="fu">model_default</span><span class="op">(</span></span>
 <span>  <span class="co"># population</span></span>
 <span>  population <span class="op">=</span> <span class="va">uk_population</span>,</span>
 <span>  <span class="co"># les taux</span></span>
@@ -887,7 +919,7 @@ compartiment de chaque groupe d’âge au cours du temps. Nous pouvons
 visualiser uniquement les individus infectieux (ceux qui se trouvent
 dans le compartiment <span class="math inline">\(I\)</span>) au cours du
 temps.</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -952,7 +984,7 @@ l’incrément doit être inférieur à un mois.</li>
 et la taille du pic le plus élevé d’un compartiment pour tous les
 groupes démographiques. Par défaut, cela calculera pour le compartiment
 infectieux.</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -971,7 +1003,7 @@ infectieux.</p>
 taille de l’épidémie à n’importe quel stade entre le début et la fin.
 Celle-ci est calculée comme le nombre d’individus <em>guéris</em> de
 l’infection à ce stade de l’épidémie.</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1005,7 +1037,7 @@ l’incidence quotidienne.</p>
 <p>Notez que le nombre de nouveaux cas infectés à chaque instant (comme
 dans la figure ci-dessous) est inférieur au nombre cumulé de personnes
 infectieuses à chaque instant (comme dans la figure ci-dessus).</p>
-<div class="codewrapper sourceCode" id="cb20">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1022,7 +1054,7 @@ infectieuses à chaque instant (comme dans la figure ci-dessus).</p>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/simulating-transmission-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
+<figure><img src="../fig/simulating-transmission-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 </div>
 </div>
 </div>
@@ -1064,7 +1096,7 @@ l’incertitude, nous exécuterons le modèle pour différentes valeurs de
 faire sont les suivantes :</p>
 <ol style="list-style-type: decimal"><li>Obtenir 100 valeurs aléatoires de <span class="math inline">\(R_0\)</span> à partir d’une distribution
 normale.</li>
-</ol><div class="codewrapper sourceCode" id="cb21">
+</ol><div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1084,11 +1116,11 @@ normale.</li>
 <span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="va">r_samples</span> <span class="op">/</span> <span class="va">infectious_period</span></span></code></pre>
 </div>
 <ol start="2" style="list-style-type: decimal"><li>Exécutez le modèle 100 fois en variant <span class="math inline">\(R_0\)</span> à chaque itération</li>
-</ol><div class="codewrapper sourceCode" id="cb22">
+</ol><div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">output_samples</span> <span class="op">&lt;-</span> <span class="fu">model_default</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">output_samples</span> <span class="op">&lt;-</span> <span class="fu">epidemics</span><span class="fu">::</span><span class="fu">model_default</span><span class="op">(</span></span>
 <span>  population <span class="op">=</span> <span class="va">uk_population</span>,</span>
 <span>  transmission_rate <span class="op">=</span> <span class="va">beta</span>,</span>
 <span>  infectiousness_rate <span class="op">=</span> <span class="va">infectiousness_rate</span>,</span>
@@ -1100,7 +1132,7 @@ normale.</li>
 <ol start="3" style="list-style-type: decimal"><li>Calculez la moyenne et les quantiles à 95 % du nombre d’individus
 infectieux pour chaque simulation du modèle et visualisez les
 résultats.</li>
-</ol><div class="codewrapper sourceCode" id="cb23">
+</ol><div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1219,9 +1251,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-late-fr/instructor/simulating-transmission.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-late-fr/instructor/simulating-transmission.html",
-  "dateCreated": "2025-11-18",
-  "dateModified": "2025-11-16",
-  "datePublished": "2025-11-18"
+  "dateCreated": "2025-11-20",
+  "dateModified": "2025-11-20",
+  "datePublished": "2025-11-20"
 }
 
   </script><script>
