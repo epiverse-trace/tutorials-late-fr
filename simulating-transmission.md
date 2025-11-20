@@ -45,7 +45,7 @@ Installer les packages si elles ne le sont pas déjà:
 
 ```r
 if (!base::require("pak")) install.packages("pak")
-pak::pak(c("epiverse-trace/epidemics", "socialmixr", "tidyverse"))
+pak::pak(c("epiverse-trace/epidemics", "socialmixr", "scales", "tidyverse"))
 ```
 
 Si vous recevez un message d'erreur, rendez-vous sur la [page principale de configuration](../learners/setup.md#configuration-des-logiciels).
@@ -228,6 +228,23 @@ contact.age.group   [0,20)  [20,40)      40+
           40+     3.063895 4.599893 5.005571
 ```
 
+N'oubliez pas que la matrice satisfait à la condition `symmetric = TRUE` au niveau du nombre total de contacts.
+
+Le nombre total de contacts entre les groupes $i$ et $j$ est calculé comme étant le nombre moyen de contacts (`contact_data$matrix`) multiplié par le nombre d'individus dans le groupe $i$ (`contact_data$demography$population`).
+
+
+``` r
+contact_data$matrix * contact_data$demography$population
+```
+
+``` output
+         contact.age.group
+age.group    [0,20)  [20,40)       40+
+  [0,20)  116672620 46177038  45343471
+  [20,40)  46177038 80232531  76019216
+  40+      45343471 76019216 144967139
+```
+
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -242,7 +259,7 @@ fonctions de la librairies `{epidemics}`.
 
 Dans le cadre de `{epidemics}` la normalisation de la matrice de contact se fait
 durant l'appel de la fonction, nous n'avons donc pas besoin de normaliser la
-matrice de contact avant de la passer à la fonction `population()` (voir section
+matrice de contact avant de la passer à la fonction `epidemics::population()` (voir section
 3. Structure de la population). Pour plus de détails sur la normalisation,
 consultez le tutoriel sur les [matrices de contact]([Simulation de la transmission](../episodes/contact-matrices.md)) .
 
@@ -275,11 +292,15 @@ Il est spécifié sous la forme d'un vecteur comme suit :
 
 
 ``` r
+# 1 in 1,000,000 is equivalent to 1e-6
 initial_i <- 1e-6
 initial_conditions_inf <- c(
   S = 1 - initial_i, E = 0, I = initial_i, R = 0, V = 0
 )
 ```
+
+Notez que R utilise la notation scientifique `e`, où `e` vous indique de multiplier le nombre de base par 10 élevé à la puissance indiquée ([DataKwery, 2020](https://www.datakwery.com/post/2020-07-11-scientific-notation-in-r/)).
+L'expression $1 \times 10^{-6}$ équivaut à `1e-6`.
 
 Pour les catégories d'âge exemptes d'infection, les conditions initiales sont
 les suivantes $S(0)=1$, $E(0) =0$, $I(0)=0$, $R(0)=0$. Nous spécifions ceci
@@ -296,16 +317,16 @@ Nous combinons les trois vecteurs de conditions initiales en une seule matrice,
 
 
 ``` r
-# combiner les conditions initiales
+# combiner les conditions initiales dans un objet de classe matricielle
 initial_conditions <- rbind(
-  initial_conditions_inf, # groupe d'age 1
+  initial_conditions_inf, # groupe d'age 1 (seul groupe infectieux)
   initial_conditions_free, # groupe d'age 2
   initial_conditions_free # groupe d'age 3
 )
 
 # utiliser la matrice de contact pour renommer les noms de lignes de la matrice
 # des conditions initiales
-rownames(initial_conditions) <- rownames(contact_matrix)
+rownames(initial_conditions) <- rownames(socialcontact_matrix)
 initial_conditions
 ```
 
@@ -327,8 +348,12 @@ vecteur `contact_data` que nous avons obtenu à l'aide de la librairie
 
 
 ``` r
+# extraire le vecteur démographique
 demography_vector <- contact_data$demography$population
-names(demography_vector) <- rownames(contact_matrix)
+
+# utiliser la matrice de contact pour renommer les noms
+# des lignes du vecteur démographique
+names(demography_vector) <- rownames(socialcontact_matrix)
 demography_vector
 ```
 
@@ -338,7 +363,7 @@ demography_vector
 ```
 
 Pour créer notre objet de classe <population> à partir de la librairie
-`{epidemics}`, nous utiliserons la fonction `population()` en spécifiant le nom
+`{epidemics}`, nous utiliserons la fonction `epidemics::population()` en spécifiant le nom
 du pays, la matrice de contact, le vecteur démographique et les conditions
 initiales.
 
@@ -346,9 +371,9 @@ initiales.
 ``` r
 library(epidemics)
 
-uk_population <- population(
+uk_population <- epidemics::population(
   name = "UK",
-  contact_matrix = contact_matrix,
+  contact_matrix = socialcontact_matrix,
   demography_vector = demography_vector,
   initial_conditions = initial_conditions
 )
@@ -438,13 +463,13 @@ lire la section sur [Systèmes et modèles d'EDO](https://epiverse-trace.github.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 Nous sommes maintenant prêts à exécuter notre modèle en utilisant
-`model_default()` de la librairies `{epidemics}`.
+`epidemics::model_default()` de la librairies `{epidemics}`.
 
 Précisons `time_end=600` pour exécuter le modèle pendant 600 jours.
 
 
 ``` r
-output <- model_default(
+output <- epidemics::model_default(
   # population
   population = uk_population,
   # les taux
@@ -588,7 +613,7 @@ newinfections_bygroup %>%
   theme_bw()
 ```
 
-<img src="fig/simulating-transmission-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="fig/simulating-transmission-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::
 
@@ -645,7 +670,7 @@ beta <- r_samples / infectious_period
 
 
 ``` r
-output_samples <- model_default(
+output_samples <- epidemics::model_default(
   population = uk_population,
   transmission_rate = beta,
   infectiousness_rate = infectiousness_rate,
