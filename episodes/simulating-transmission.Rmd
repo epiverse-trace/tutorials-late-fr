@@ -39,7 +39,7 @@ comprendre les notions abordées dans ce cours.
 **Théorie des épidémies** : [Transmission](https://doi.org/10.1155/2011/267049),
 [Nombre de reproduction](https://doi.org/10.3201/eid2501.171901).
 
-**R packages installés**: `{epidemics}`, `{socialmixr}`, `{tidyverse}`.
+**R packages installés**: `{epidemics}`, `{socialmixr}`, `{scales}`, `{tidyverse}`.
 
 :::::::::::::::::::::::::::::::::
 
