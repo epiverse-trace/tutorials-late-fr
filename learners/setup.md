@@ -239,50 +239,7 @@ Ces étapes d'installation peuvent vous demander `? Do you want to continue (Y/n
 If you get an error message when installing {epidemics}, try this alternative code:
 
 ```r
-if(!require("devtools")) install.packages("devtools")
-
-devtools::install_github("epiverse-trace/epidemics")
-```
-
-:::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::: spoiler
-
-### Que faire si une erreur persiste ?
-
-Si le mot-clé du message d'erreur contient ceci: `Personal access token (PAT)`,
-vous devrez peut-être [configurer votre token GitHub](https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token).
-
-Installez d'abord ces librairies :
-
-```r
-if(!require("pak")) install.packages("pak")
-
-new <- c("gh",
-         "gitcreds",
-         "usethis")
-
-pak::pak(new)
-```
-
-Ensuite, suivez ces trois étapes pour [configurer votre token GitHub (lisez ce guide étape par étape)](https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token):
-
-```r
-# creer un token
-usethis::create_github_token()
-
-# configurer votre token 
-gitcreds::gitcreds_set()
-
-# obtenir un rapport de votre situation
-usethis::git_sitrep()
-```
-
-Puis Réessayez d'installer {tracetheme} par example:
-
-```r
-if(!require("remotes")) install.packages("remotes")
-remotes::install_github("epiverse-trace/tracetheme")
+install.packages("epidemics", repos = c("https://epiverse-trace.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 Si l'erreur persiste, [contactez-nous](#your-questions)!
