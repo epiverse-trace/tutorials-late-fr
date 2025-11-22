@@ -66,6 +66,16 @@ Dans ce tutoriel, différents types d'intervention et la manière dont ils peuve
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::: instructor
+
+Share with learners the code for the baseline model.
+
+It has **different** disease parameters than previous episode.
+
+Then start with the livecoding directly with interventions.
+
+::::::::::::::::::::::
+
 ## Modèle de référence
 
 Nous étudierons l'effet des interventions sur une épidémie de COVID-19 à l'aide d'un modèle SEIR (`model_default()` dans le paquetage R `{epidemics}`). Pour être en mesure de voir l'effet de notre intervention, nous exécutons également une variante de base du modèle, c'est-à-dire sans intervention.
@@ -140,6 +150,18 @@ output_baseline <- epidemics::model_default(
   time_end = 300, increment = 1.0
 )
 ```
+
+:::::::::::::::::::::: instructor
+
+Make a pause.
+
+Use slides to introduce the topics of:
+
+- Non pharmaceutical interventions.
+
+Then continue with the livecoding.
+
+::::::::::::::::::::::
 
 ## Interventions non pharmaceutiques
 
@@ -333,6 +355,18 @@ Pour mettre en œuvre les interventions sur les contacts et les taux dans la mê
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::: instructor
+
+Make a pause.
+
+Use slides to introduce the topics of:
+
+- Pharmaceutical interventions.
+
+Then continue with the livecoding.
+
+::::::::::::::::::::::
+
 ## Interventions pharmaceutiques
 
 Les interventions pharmaceutiques (IP) sont des mesures telles que les programmes de vaccination et de traitement de masse. Dans la section précédente, nous avons intégré les interventions dans le modèle en réduisant les valeurs des paramètres pendant une période spécifique de la fenêtre temporelle au cours de laquelle ces interventions doivent avoir lieu. Dans le cas de la vaccination, nous supposons qu'après l'intervention, les individus ne sont plus sensibles et doivent être classés dans un état pathologique différent. Par conséquent, nous spécifions le taux auquel les individus sont vaccinés et suivons le nombre d'individus vaccinés au fil du temps.
@@ -462,6 +496,16 @@ Le graphique montre que le pic du nombre total d'individus infectieux en cas de 
 
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::: instructor
+
+Stop the livecoding.
+
+Suggest learners to read the next episode.
+
+Return to slides.
+
+::::::::::::::::::::::
 
 ## Résumé
 
