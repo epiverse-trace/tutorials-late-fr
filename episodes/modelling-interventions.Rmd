@@ -94,10 +94,10 @@ cm_results <- socialmixr::contact_matrix(
   symmetric = TRUE
 )
 
-# prépare la matrice de contact 
+# prépare la matrice de contact
 cm_matrix <- t(cm_results$matrix)
 
-# prépare le vecteur de la démographie 
+# prépare le vecteur de la démographie
 demography_vector <- cm_results$demography$population
 names(demography_vector) <- rownames(cm_matrix)
 
@@ -111,7 +111,7 @@ initial_conditions <- c(
   V = 0
 )
 
-# crée la matrice de conditions initiales pour chaque tranche d'âge 
+# crée la matrice de conditions initiales pour chaque tranche d'âge
 initial_conditions <- base::rbind(
   initial_conditions,
   initial_conditions,
@@ -119,7 +119,7 @@ initial_conditions <- base::rbind(
 )
 rownames(initial_conditions) <- rownames(cm_matrix)
 
-# prépare la population à modéliser comme étant touchée par l'épidémie 
+# prépare la population à modéliser comme étant touchée par l'épidémie
 uk_population <- epidemics::population(
   name = "UK",
   contact_matrix = cm_matrix,
@@ -424,7 +424,7 @@ Pour étudier l'effet de la vaccination, nous devons créer un objet de vaccinat
 Nous supposerons ici que tous les groupes d'âge sont vaccinés au même taux (0,01) et que le programme de vaccination commence au 40e jour et se poursuit pendant 150 jours.
 
 ```{r vaccinate}
-# prépare un object de vaccination 
+# prépare un object de vaccination
 vaccinate <- epidemics::vaccination(
   name = "vaccinate all",
   time_begin = matrix(40, nrow(cm_matrix)),
