@@ -51,10 +51,11 @@ Par exemple, une matrice de contact hypothétique représentant le nombre moyen 
 
 $$
 \begin{bmatrix}
-2 & 2\
-1 & 3
+2 & 2\\
+1 & 3 
 \end{bmatrix}
 $$
+
 Dans cet exemple, cela signifie que les enfants rencontrent en moyenne 2 autres enfants et 2 adultes par jour (première ligne), et que les adultes rencontrent en moyenne 1 enfant et 3 autres adultes par jour (deuxième ligne). Nous pouvons utiliser ce type d'information pour rendre compte du rôle que joue l'hétérogénéité des contacts dans la transmission des maladies infectieuses.
 
 ::::::::::::::::::::::::::::::::::::: callout
@@ -297,22 +298,23 @@ Les [équations différentielles](../learners/reference.md#ordinary) ci-dessous 
 
 $$
 \begin{aligned}
-\frac{dS}{dt} & = - \beta S I /N \
-\frac{dI}{dt} &= \beta S I /N - \gamma I \
-\frac{dR}{dt} &=\gamma I \
+\frac{dS}{dt} & = - \beta S I /N \\
+\frac{dI}{dt} &= \beta S I /N - \gamma I \\
+\frac{dR}{dt} &=\gamma I \\
 \end{aligned}
 $$
+
 Pour ajouter une structure d'âge à notre modèle, nous devons ajouter des équations supplémentaires pour les états d'infection $S$, $I$ et $R$ pour chaque groupe d'âge $i$. Si nous voulons supposer qu'il existe une hétérogénéité dans les contacts entre les groupes d'âge, nous devons adapter le terme de transmission $\beta SI$ pour inclure la matrice de contact $C$ comme suit :
 
-$$ \beta S_i \sum_j C_{i,j} I_j/N_j. $$
+$$ \beta S_i \sum_j C_{i,j} I_j/N_j. $$ 
 
 Individus susceptibles dans le groupe d'âge $i$ sont infectés en fonction de leur taux de contact avec les individus de chaque groupe d'âge. Pour chaque état ($S$, $E$, $I$ et $R$) et le groupe d'âge ($i$), nous avons une équation différentielle décrivant le taux de changement par rapport au temps.
 
 $$
 \begin{aligned}
-\frac{dS_i}{dt} & = - \beta S_i \sum_j C_{i,j} I_j/N_j \
-\frac{dI_i}{dt} &= \beta S_i\sum_j C_{i,j} I_j/N_j - \gamma I_i \
-\frac{dR_i}{dt} &=\gamma I_i \
+\frac{dS_i}{dt} & = - \beta S_i \sum_j C_{i,j} I_j/N_j \\
+\frac{dI_i}{dt} &= \beta S_i\sum_j C_{i,j} I_j/N_j - \gamma I_i \\
+\frac{dR_i}{dt} &=\gamma I_i \\
 \end{aligned}
 $$
 

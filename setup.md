@@ -234,14 +234,12 @@ Ces étapes d'installation peuvent vous demander `? Do you want to continue (Y/n
 
 ::::::::::::::::::::::::::::: spoiler
 
-### do you get an error with {epidemics}?
+### obtenez-vous une erreur avec {epidemics} ?
 
-If you get an error message when installing {epidemics}, try this alternative code:
+Si vous obtenez un message d'erreur lors de l'installation de {epidemics}, essayez ce code alternatif :
 
 ```r
-if(!require("devtools")) install.packages("devtools")
-
-devtools::install_github("epiverse-trace/epidemics")
+install.packages("epidemics", repos = c("https://epiverse-trace.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 :::::::::::::::::::::::::::::
