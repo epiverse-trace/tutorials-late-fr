@@ -275,7 +275,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="modelling-interventions.html">3. Modélisation des interventions</a>
+        <a href="model-choices.html">3. Choisir un modèle approprié</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -287,7 +287,19 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="compare-interventions.html">4. Comparer les résultats des interventions de santé publique</a>
+        <a href="modelling-interventions.html">4. Modélisation des interventions</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush6">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading6">
+        <a href="compare-interventions.html">5. Comparer les résultats des interventions de santé publique</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -418,7 +430,7 @@ utilisé pour estimer les matrices de contact.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Remarque de l'instructeur </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 
 </div>
@@ -604,7 +616,7 @@ Pour télécharger une enquête, vous pouvez utiliser
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Afficher les détails </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>Vous pouvez explorer toutes les enquêtes disponibles dans le
 référentiel Zenodo à l’adresse <a href="https://zenodo.org/communities/social_contact_data/" class="external-link uri">https://zenodo.org/communities/social_contact_data/</a>. Si
@@ -660,7 +672,7 @@ matrice de contact.</p></li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Donner un indice </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>L’objet d’enquête <code>zambia_sa_survey</code> contient des données
 provenant de deux pays. Si vous avez besoin d’estimer la matrice des
@@ -691,7 +703,7 @@ dans un dataframe, vous pouvez utiliser l’opérateur signe dollar :
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Remarque de l'instructeur </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2003,6 +2015,598 @@ en utilisant une gamme de valeurs des paramètres du modèle.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</section></section><section id="aio-model-choices"><p>Content from <a href="model-choices.html">Choisir un modèle approprié</a></p>
+<hr>
+<p>Dernière mise à jour le 2025-11-24 |
+
+        <a href="https://github.com/epiverse-trace/tutorials-late-fr/edit/main/episodes/model-choices.Rmd" class="external-link">Modifier cette page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<p>Durée estimée : <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Afficher toutes les solutions " data-collapse="Cacher toutes les solutions "> Afficher toutes les solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Vue d'ensemble</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>Comment choisir un modèle mathématique approprié pour bien faire ma
+tâche d’analyse ?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectifs</h3>
+<ul>
+<li>Comprendre les exigences du modèle pour une question de recherche
+spécifique</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>::::::::::::::::::::::::::::::::::::: prereq</p>
+<ul>
+<li>Compléter le tutoriel <a href="simulating-transmission.html">Simuler
+la transmission</a> :::::::::::::::::::::::::::::::::</li>
+</ul>
+<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<hr class="half-width">
+<p>Il existe des modèles mathématiques pour différentes infections,
+interventions et schémas de transmission qui peuvent être utilisés pour
+répondre à de nouvelles questions. Dans ce tutoriel, nous apprendrons à
+choisir un modèle existant pour accomplir une tâche donnée.</p>
+<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
+  <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Remarque de l'instructeur </h3>
+</button>
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div class="accordion-body">
+<p>L’objectif de ce tutoriel est de comprendre les modèles existants
+afin de décider s’ils sont appropriés pour une question donnée.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="choisir-un-modèle" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="choisir-un-modèle" class="callout-inner">
+<h3 class="callout-title">Choisir un modèle</h3>
+<div class="callout-content">
+<p>Lorsqu’il s’agit de choisir le modèle mathématique à utiliser, un
+certain nombre de questions se posent :</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Quelle est l’infection ou la maladie en question ? </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<p>Il se peut qu’un modèle existe déjà pour la maladie que vous étudiez,
+ou qu’il existe un modèle pour une infection dont les voies de
+transmission et les caractéristiques épidémiologiques sont similaires et
+qui peut être adapté. Par exemple, les maladies ayant des voies de
+transmission similaires (par exemple, transmission par voie aérienne,
+par gouttelettes ou par contact) et une histoire naturelle similaire
+(par exemple, période d’incubation, période infectieuse) peuvent
+utiliser des structures de modèle similaires.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Avons-nous besoin d’un modèle déterministe ou stochastique ? </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<p>Les structures des modèles diffèrent en fonction de l’ampleur et de
+la nature de l’épidémie. Lorsque le nombre d’infections simulées est
+faible, la variation stochastique (c’est-à-dire le caractère aléatoire
+que nous pouvons définir mathématiquement) des résultats peut avoir une
+incidence significative sur le déclenchement ou non d’une épidémie. Les
+épidémies localisés peuvent être mieux modélisées à l’aide d’approches
+stochastiques afin de saisir l’incertitude de la dynamique de
+transmission précoce. Les épidémies à plus grande échelle, peuvent
+souvent être modélisées efficacement à l’aide d’approches déterministes,
+car la variation stochastique devient moins importante par rapport à la
+dynamique globale.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Quel est le résultat qui nous intéresse ? </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<p>Le résultat d’intérêt est généralement une quantité mesurable dérivée
+du modèle mathématique. Il peut s’agir de</p>
+<ul>
+<li>le nombre d’infections au fil du temps</li>
+<li>Le nombre maximal d’hospitalisations</li>
+<li>Le nombre total de cas de maladies graves</li>
+<li>L’ampleur finale de l’épidémie</li>
+<li>Le moment des pics épidémiques</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
+  <h4 class="accordion-header" id="headingSolution4"> Comment la transmission est-elle modélisée ? </h4>
+</button>
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div class="accordion-body">
+<p>Par exemple, <a href="reference.html#direct">directes</a> ou <a href="reference.html#indirect">indirecte</a>, <a href="reference.html#airborne">par voie aérienne</a> ou <a href="reference.html#vectorborne">à transmission vectorielle</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution5" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution5" aria-expanded="false" aria-controls="collapseSolution5">
+  <h4 class="accordion-header" id="headingSolution5"> Comment les différents processus (par exemple la transmission) sont-ils formulés dans les équations ? </h4>
+</button>
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div class="accordion-body">
+<p>Pour une même infection ou un même type d’épidémie, il peut y avoir
+des différences subtiles dans les structures des modèles, qui peuvent
+passer inaperçues si l’on n’étudie pas les équations. Par exemple, les
+paramètres de transmissibilité peuvent être spécifiés sous forme de taux
+ou de probabilités. Si vous souhaitez utiliser les valeurs des
+paramètres d’autres modèles publiés, vous devez vérifier que la
+transmission est formulée de la même manière.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution6" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution6" aria-expanded="false" aria-controls="collapseSolution6">
+  <h4 class="accordion-header" id="headingSolution6"> Des interventions seront-elles modélisées ? </h4>
+</button>
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div class="accordion-body">
+<p>Il se peut que nous nous intéressions aux interventions telles que la
+vaccination, la distanciation physique ou les programmes de traitement.
+Les capacités d’intégration des interventions varient d’un modèle à
+l’autre :</p>
+<ul>
+<li>Certains modèles peuvent simuler des interventions continues (par
+exemple, des programmes de vaccination délivrés en continu).</li>
+<li>D’autres traitent les interventions discrètes (par exemple, les
+fermetures ponctuelles d’écoles).</li>
+<li>Certains modèles ne comprennent aucune fonctionnalité permettant de
+modéliser les interventions.</li>
+</ul>
+<p>Nous discutons des interventions en détail dans le tutoriel <a href="modelling-interventions.html">Modélisation des
+interventions</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="modèles-disponibles-en-epidemics">Modèles disponibles en <code>{epidemics}</code>
+<a class="anchor" aria-label="anchor" href="#mod%C3%A8les-disponibles-en-epidemics"></a>
+</h2>
+<hr class="half-width">
+<p>Le package R <code>{epidemics}</code> contient des fonctions
+permettant d’exécuter les modèles existants. Pour plus de détails sur
+les modèles disponibles, consultez le package <a href="https://epiverse-trace.github.io/epidemics/reference/index.html#model-functions" class="external-link">Guide
+de référence des “Fonctions de modèle”</a>. Tous les noms des fonctions
+des modèles commencent par <code>model_*()</code>. Pour apprendre
+comment exécuter les modèles dans R, lisez le document suivant <a href="https://epiverse-trace.github.io/epidemics/articles/#guides-to-library-models" class="external-link">Vignettes
+sur les “Guides pour les modèles de la bibliothèque”</a>.</p>
+<div id="quel-modèle" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="quel-modèle" class="callout-inner">
+<h3 class="callout-title">Quel modèle ?</h3>
+<div class="callout-content">
+<p>On vous a demandé d’étudier la variation du nombre de personnes
+infectieuses dans les premières phases d’une épidémie d’Ebola.</p>
+<p>Parmi les modèles suivants, lequel serait le plus approprié pour
+cette tâche ?</p>
+<ul>
+<li><p><code>model_default()</code></p></li>
+<li><p><code>model_ebola()</code></p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
+  <h4 class="accordion-header" id="headingHint1"> Donner un indice </h4>
+</button>
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div class="accordion-body">
+<p>Réfléchissez aux questions suivantes :</p>
+<div id="checklist1" class="callout checklist">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check-square"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Liste de vérification</h3>
+<div class="callout-content">
+<ul>
+<li>Quelle est l’infection ou la maladie en question ?</li>
+<li>Avons-nous besoin d’un modèle déterministe ou stochastique ?</li>
+<li>Quel est le résultat qui nous intéresse ?</li>
+<li>Des interventions seront-elles modélisées ?</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution7" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution7" aria-expanded="false" aria-controls="collapseSolution7">
+  <h4 class="accordion-header" id="headingSolution7"> Montrer la solution </h4>
+</button>
+<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div class="accordion-body">
+<ul>
+<li>Quelle est l’infection ou la maladie concernée ?
+<strong>Ebola</strong>
+</li>
+<li>Faut-il un modèle déterministe ou stochastique ? <strong>Un modèle
+stochastique nous permettrait d’étudier les variations au cours des
+premières phases de l’épidémie</strong>
+</li>
+<li>Quel est le résultat qui vous intéresse ? <strong>Nombre
+d’infections</strong>
+</li>
+<li>Des interventions seront-elles modélisées ?
+<strong>Non</strong>
+</li>
+</ul>
+<div class="section level4">
+<h4 id="model_default">
+<code>model_default()</code><a class="anchor" aria-label="anchor" href="#model_default"></a>
+</h4>
+<p>Un modèle SEIR (S: susceptible, E: exposé; I: infectieux; R:
+récupéré) déterministe avec une transmission directe spécifique à
+l’âge.</p>
+<!--html_preserve-->
+<div id="htmlwidget-2907d53b0871e7dbf834" class="grViz html-widget html-fill-item" style="width:504px;height:504px;">
+
+</div>
+<script type="application/json" data-for="htmlwidget-2907d53b0871e7dbf834">{"x":{"diagram":"digraph {\n\n  # graph statement\n  #################\n  graph [layout = dot,\n         rankdir = LR,\n         overlap = true,\n         fontsize = 10]\n\n  # nodes\n  #######\n  node [shape = square,\n       fixedsize = true\n       width = 1.3]\n\n       S\n       E\n       I\n       R\n\n  # edges\n  #######\n  S -> E [label = \" infection \n(transmissibilité &beta;)\"]\n  E -> I [label = \" début de la contagiosité \n(taux de contagiosité &alpha;)\"]\n  I -> R [label = \" récupération \n(taux de récupération &gamma;)\"]\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve--><p>Le modèle est capable de simuler une épidémie de type Ebola, mais
+comme il est déterministe, nous ne sommes pas en mesure d’étudier les
+variations stochastiques au cours des premières phases de
+l’épidémie.</p>
+</div>
+<div class="section level4">
+<h4 id="model_ebola">
+<code>model_ebola()</code><a class="anchor" aria-label="anchor" href="#model_ebola"></a>
+</h4>
+<p>Un modèle stochastique SEIHFR (Susceptible, Exposé, Infectieux,
+Hospitalisé, Funéraire, Retiré) développé spécifiquement pour la maladie
+à virus Ebola. Le modèle comprend des compartiments pour les états
+Hospitalisé et Funéraire, qui sont essentiels pour comprendre la
+dynamique de transmission du virus Ebola en raison du risque élevé de
+transmission dans les établissements de soins de santé et pendant les
+pratiques funéraires traditionnelles. Le modèle présente une
+stochasticité dans les temps de passage entre les états, qui sont
+modélisés avec des distributions d’Erlang.</p>
+<p>Les paramètres clés affectant la transition entre les états sont les
+suivants :</p>
+<ul>
+<li>
+<span class="math inline">\(R_0\)</span> le nombre de reproduction
+de base,</li>
+<li>
+<span class="math inline">\(\rho^I\)</span> la période infectieuse
+moyenne,</li>
+<li>
+<span class="math inline">\(\rho^E\)</span> la période
+préinfectieuse moyenne,</li>
+<li>
+<span class="math inline">\(p_{hosp}\)</span> la probabilité d’être
+transféré dans le compartiment hospitalisé.</li>
+</ul>
+<p>**Note : la relation fonctionnelle entre la période préinfectieuse
+(<span class="math inline">\(\rho^E\)</span>) et le taux de transition
+entre exposé et infectieux (<span class="math inline">\(\gamma^E\)</span>) est la suivante <span class="math inline">\(\rho^E = k^E/\gamma^E\)</span> où <span class="math inline">\(k^E\)</span> est le paramètre de forme de la
+distribution d’Erlang. De même, pour la période infectieuse <span class="math inline">\(\rho^I = k^I/\gamma^I\)</span>. Pour plus de
+détails sur la formulation du modèle stochastique, vous pourriez
+regarder la section sur les <a href="https://epiverse-trace.github.io/epidemics/articles/model_ebola.html#details-discrete-time-ebola-virus-disease-model" class="external-link">Modèle
+à temps discret de la maladie à virus Ebola</a> dans la vignette
+“Modélisation des réponses à une épidémie stochastique de virus Ebola”.
+**</p>
+<!--html_preserve-->
+<div id="htmlwidget-e4af9ca629df551fc17d" class="grViz html-widget html-fill-item" style="width:504px;height:504px;">
+
+</div>
+<script type="application/json" data-for="htmlwidget-e4af9ca629df551fc17d">{"x":{"diagram":"digraph {\n\n  # graph statement\n  #################\n  graph [layout = dot,\n  rankdir = LR,\n  overlap = true,\n  fontsize = 10]\n\n  # nodes\n  #######\n  node [shape = square,\n       fixedsize = true\n       width = 1.3]\n\n       S\n       E\n       I\n       H\n       F\n       R\n\n  # edges\n  #######\n  S -> E [label = \" infection (&beta;)\"]\n  E -> I [label = \" début de la\ncontagiosité (&gamma; E)\"]\n  I -> F [label = \" mort (funérailles) \n(&gamma; I)\"]\n  F -> R [label = \" enterrements dignes et sécurisés (un pas de temps) \"]\n  I -> H [label = \" hospitalisation (p hosp)\"]\n  H -> R [label = \" récupération ou enterrements sécurisés \n (&gamma; I)\"]\n\n  subgraph {\n    rank = same; I; F;\n  }\n  subgraph {\n    rank = same; H; R;\n  }\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve--><p>Le modèle comporte des paramètres supplémentaires décrivant le risque
+de transmission dans les hôpitaux et les les funérailles :</p>
+<ul>
+<li>
+<span class="math inline">\(p_{ETU}\)</span> la proportion de cas
+hospitalisés contribuant à l’infection de personnes sensibles (ETU =
+unités de traitement du virus Ebola),</li>
+<li>
+<span class="math inline">\(p_{funeral}\)</span> la proportion de
+funérailles au cours desquelles le risque de transmission est le même
+que pour les personnes infectieuses dans la communauté.</li>
+</ul>
+<p>Ce modèle étant stochastique, il constitue le choix le plus approprié
+pour étudier la variation du nombre de personnes infectées au cours des
+premières phases d’une épidémie d’Ebola.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="devrais-je-utiliser-un-modèle-mathématique" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="devrais-je-utiliser-un-modèle-mathématique" class="callout-inner">
+<h3 class="callout-title">Devrais-je utiliser un modèle mathématique ?</h3>
+<div class="callout-content">
+<p>Les modèles mathématiques peuvent être utilisés pour générer des
+trajectoires de maladie, qui peuvent ensuite être utilisées pour
+calculer la taille finale de l’épidémie. Si seule la taille finale vous
+intéresse, il est possible d’utiliser la théorie mathématique pour
+calculer directement cette quantité, sans avoir à simuler le modèle
+complet puis déterminer le nombre d’individus infectés. Ces calculs
+mathématiques sont effectués à l’aide de fonctions R dans le paquetage
+<a href="https://github.com/epiverse-trace/finalsize" class="external-link">finalsize</a>.</p>
+<p>L’avantage d’utiliser <code>finalsize</code> est que moins de
+paramètres sont nécessaires. Il suffit de définir la transmissibilité et
+la susceptibilité de la population, ainsi qu’une matrice de contacts si
+pertinent, plutôt que des paramètres tels que la période infectieuse,
+qui sont nécessaires dans le cadre du package {epidemics} pour simuler
+la dynamique dans le temps. Consultez la page <a href="https://epiverse-trace.github.io/finalsize/articles/finalsize.html" class="external-link">vignettes
+du paquet</a> pour plus d’informations sur l’utilisation de
+<code>finalsize</code> pour calculer la taille de l’épidémie.</p>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="défi-analyse-de-lépidémie-debola">Défi : Analyse de l’épidémie d’Ebola<a class="anchor" aria-label="anchor" href="#d%C3%A9fi-analyse-de-l%C3%A9pid%C3%A9mie-debola"></a>
+</h2>
+<hr class="half-width">
+<div id="exécution-du-modèle" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exécution-du-modèle" class="callout-inner">
+<h3 class="callout-title">Exécution du modèle</h3>
+<div class="callout-content">
+<p>Vous avez été chargé de générer les trajectoires initiales d’une
+épidémie d’Ebola en Guinée. En utilisant <code>model_ebola()</code> et
+les informations détaillées ci-dessous, effectuez les tâches suivantes
+:</p>
+<ol style="list-style-type: decimal">
+<li>Exécutez le modèle une fois et représentez graphiquement le nombre
+d’individus infectieux au fil du temps.</li>
+<li>Exécutez le modèle 100 fois et représentez la moyenne, les quantiles
+supérieurs et inférieurs à 95 % du nombre d’individus infectieux en
+fonction du temps.</li>
+</ol>
+<ul>
+<li>Taille de la population : 14 millions</li>
+<li>Nombre initial d’individus exposés : 10</li>
+<li>Nombre initial d’individus infectieux : 5</li>
+<li>Durée de la simulation : 120 jours</li>
+<li>Valeurs des paramètres :
+<ul>
+<li>
+<span class="math inline">\(R_0\)</span> (<code>r0</code>) =
+1.1,</li>
+<li>
+<span class="math inline">\(p^I\)</span>
+(<code>infectious_period</code>) = 12,</li>
+<li>
+<span class="math inline">\(p^E\)</span>
+(<code>preinfectious_period</code>) = 5,</li>
+<li>
+<span class="math inline">\(k^E=k^I = 2\)</span>,</li>
+<li>
+<span class="math inline">\(1-p_{hosp}\)</span>
+(<code>prop_community</code>) = 0.9,</li>
+<li>
+<span class="math inline">\(p_{ETU}\)</span> (<code>etu_risk</code>)
+= 0.7,</li>
+<li>
+<span class="math inline">\(p_{funeral}\)</span>
+(<code>funeral_risk</code>) = 0.5</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
+  <h4 class="accordion-header" id="headingHint2"> Code pour les conditions initiales </h4>
+</button>
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># définir la taille de la population</span></span>
+<span><span class="va">population_size</span> <span class="op">&lt;-</span> <span class="fl">14e6</span></span>
+<span></span>
+<span><span class="va">E0</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="va">I0</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
+<span><span class="co"># préparer les conditions initiales sous forme de proportions.</span></span>
+<span><span class="va">initial_conditions</span> <span class="op">&lt;-</span> <span class="fu">c</span><span class="op">(</span></span>
+<span>  S <span class="op">=</span> <span class="va">population_size</span> <span class="op">-</span> <span class="op">(</span><span class="va">E0</span> <span class="op">+</span> <span class="va">I0</span><span class="op">)</span>, E <span class="op">=</span> <span class="va">E0</span>, I <span class="op">=</span> <span class="va">I0</span>, H <span class="op">=</span> <span class="fl">0</span>, F <span class="op">=</span> <span class="fl">0</span>, R <span class="op">=</span> <span class="fl">0</span></span>
+<span><span class="op">)</span> <span class="op">/</span> <span class="va">population_size</span></span>
+<span></span>
+<span><span class="va">guinea_population</span> <span class="op">&lt;-</span> <span class="fu">population</span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="st">"Guinea"</span>,</span>
+<span>  contact_matrix <span class="op">=</span> <span class="fu">matrix</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="co"># note dummy value</span></span>
+<span>  demography_vector <span class="op">=</span> <span class="va">population_size</span>, <span class="co"># 14 million, no age groups</span></span>
+<span>  initial_conditions <span class="op">=</span> <span class="fu">matrix</span><span class="op">(</span></span>
+<span>    <span class="va">initial_conditions</span>,</span>
+<span>    nrow <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionHint3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
+  <h4 class="accordion-header" id="headingHint3"> Indice : simulations de modèles multiples </h4>
+</button>
+<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
+<div class="accordion-body">
+<p>Adaptez le code de la section <a href="simulating-transmission.html#accounting-for-uncertainty">prise en
+compte de l’incertitude</a></p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution8" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution8" aria-expanded="false" aria-controls="collapseSolution8">
+  <h4 class="accordion-header" id="headingSolution8"> Montrer la solution </h4>
+</button>
+<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
+<div class="accordion-body">
+<ol style="list-style-type: decimal">
+<li>Exécutez le modèle une fois et représentez le nombre d’individus
+infectieux en fonction du temps.</li>
+</ol>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">model_ebola</span><span class="op">(</span></span>
+<span>  population <span class="op">=</span> <span class="va">guinea_population</span>,</span>
+<span>  transmission_rate <span class="op">=</span> <span class="fl">1.1</span> <span class="op">/</span> <span class="fl">12</span>,</span>
+<span>  infectiousness_rate <span class="op">=</span> <span class="fl">2.0</span> <span class="op">/</span> <span class="fl">5</span>,</span>
+<span>  removal_rate <span class="op">=</span> <span class="fl">2.0</span> <span class="op">/</span> <span class="fl">12</span>,</span>
+<span>  prop_community <span class="op">=</span> <span class="fl">0.9</span>,</span>
+<span>  etu_risk <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  funeral_risk <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  time_end <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  replicates <span class="op">=</span> <span class="fl">1</span> <span class="co"># replicates argument</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">output</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">compartment</span> <span class="op">==</span> <span class="st">"infectious"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span><span class="va">time</span>, <span class="va">value</span><span class="op">)</span>,</span>
+<span>    linewidth <span class="op">=</span> <span class="fl">1.2</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_y_continuous</span><span class="op">(</span></span>
+<span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va">comma</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Simulation time (days)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Individuals"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_bw</span><span class="op">(</span></span>
+<span>    base_size <span class="op">=</span> <span class="fl">15</span></span>
+<span>  <span class="op">)</span></span></code></pre>
+</div>
+<figure><img src="../fig/model-choices-rendered-unnamed-chunk-3-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><ol start="2" style="list-style-type: decimal">
+<li>Exécutez le modèle 100 fois et représentez la moyenne, les quantiles
+supérieurs et inférieurs à 95 % du nombre d’individus infectieux en
+fonction du temps.</li>
+</ol>
+<p>Nous exécutons le modèle 100 fois avec les <em>même</em> valeurs des
+paramètres.</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">output_replicates</span> <span class="op">&lt;-</span> <span class="fu">model_ebola</span><span class="op">(</span></span>
+<span>  population <span class="op">=</span> <span class="va">guinea_population</span>,</span>
+<span>  transmission_rate <span class="op">=</span> <span class="fl">1.1</span> <span class="op">/</span> <span class="fl">12</span>,</span>
+<span>  infectiousness_rate <span class="op">=</span> <span class="fl">2.0</span> <span class="op">/</span> <span class="fl">5</span>,</span>
+<span>  removal_rate <span class="op">=</span> <span class="fl">2.0</span> <span class="op">/</span> <span class="fl">12</span>,</span>
+<span>  prop_community <span class="op">=</span> <span class="fl">0.9</span>,</span>
+<span>  etu_risk <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  funeral_risk <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  time_end <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  replicates <span class="op">=</span> <span class="fl">100</span> <span class="co"># replicates argument</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">output_replicates</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">filter</span><span class="op">(</span><span class="va">compartment</span> <span class="op">==</span> <span class="st">"infectious"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span></span>
+<span>    <span class="fu">aes</span><span class="op">(</span><span class="va">time</span>, <span class="va">value</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">stat_summary</span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"line"</span>, fun <span class="op">=</span> <span class="va">mean</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">stat_summary</span><span class="op">(</span></span>
+<span>    geom <span class="op">=</span> <span class="st">"ribbon"</span>,</span>
+<span>    fun.min <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">z</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="fu">quantile</span><span class="op">(</span><span class="va">z</span>, <span class="fl">0.025</span><span class="op">)</span></span>
+<span>    <span class="op">}</span>,</span>
+<span>    fun.max <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">z</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="fu">quantile</span><span class="op">(</span><span class="va">z</span>, <span class="fl">0.975</span><span class="op">)</span></span>
+<span>    <span class="op">}</span>,</span>
+<span>    alpha <span class="op">=</span> <span class="fl">0.3</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Simulation time (days)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Individuals"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_bw</span><span class="op">(</span></span>
+<span>    base_size <span class="op">=</span> <span class="fl">15</span></span>
+<span>  <span class="op">)</span></span></code></pre>
+</div>
+<figure><img src="../fig/model-choices-rendered-unnamed-chunk-4-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+</div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Points clés</h3>
+<div class="callout-content">
+<ul>
+<li>Les modèles mathématiques existants doivent être sélectionnés en
+fonction de la question de recherche.</li>
+<li>Il est important de vérifier qu’un modèle repose sur des hypothèses
+appropriées concernant la transmission, le potentiel épidémique, les
+résultats et les interventions.</li>
+</ul>
+</div>
+</div>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
 </section></section><section id="aio-modelling-interventions"><p>Content from <a href="modelling-interventions.html">Modélisation des interventions</a></p>
 <hr>
 <p>Dernière mise à jour le 2025-11-23 |
@@ -2930,7 +3534,7 @@ manipulation et la visualisation des données.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Remarque de l'instructeur </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Dans ce tutoriel, nous introduisons le concept de contrefactuel et la
 manière de comparer des scénarios (contrefactuel versus intervention)
@@ -3134,7 +3738,7 @@ temps.</li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> CONSEIL : Exécuter le modèle avec des valeurs de paramètres par défaut </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>Nous pouvons exécuter le modèle Vacamole avec les <a href="https://epiverse-trace.github.io/epidemics/articles/model_vacamole.html#model-epidemic-using-vacamole" class="external-link">valeurs
 par défaut de paramètres</a> en spécifiant simplement l’objet de la
@@ -3158,7 +3762,7 @@ population et le nombre de pas de temps pour lesquels le modèle doit
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Montrer la solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>Exécutez le modèle</li>
@@ -3572,7 +4176,7 @@ cette simulation peut prendre plusieurs minutes.</em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Montrer la solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3758,9 +4362,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-late-fr/instructor/aio.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-late-fr/instructor/aio.html",
-  "dateCreated": "2025-11-23",
-  "dateModified": "2025-11-23",
-  "datePublished": "2025-11-23"
+  "dateCreated": "2025-11-24",
+  "dateModified": "2025-11-24",
+  "datePublished": "2025-11-24"
 }
 
   </script><script>
