@@ -224,7 +224,7 @@ DiagrammeR::grViz("digraph {
   I -> F [label = ' mort (funérailles) \n(&gamma; I)']
   F -> R [label = ' enterrements dignes et sécurisés (un pas de temps) ']
   I -> H [label = ' hospitalisation (p hosp)']
-  H -> R [label = ' récupération ou enterrements dignes et sécurisés \n (&gamma; I)']
+  H -> R [label = ' récupération ou enterrements sécurisés \n (&gamma; I)']
 
   subgraph {
     rank = same; I; F;
