@@ -1,11 +1,10 @@
 ---
-title: 'Choosing an appropriate model'
-teaching: 10 # teaching time in minutes
-exercises: 20 # exercise time in minutes
-
+title: Choisir un modèle approprié
+teaching: 10
+exercises: 20
 ---
 
-```{r setup, echo = FALSE, message = FALSE, warning = FALSE}
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 library(epidemics)
 library(dplyr)
 library(ggplot2)
@@ -14,154 +13,143 @@ library(ggplot2)
 set.seed(33)
 ```
 
-:::::::::::::::::::::::::::::::::::::: questions 
+:::::::::::::::::::::::::::::::::::::: questions
 
-- How do I choose a mathematical model that's appropriate to complete my analytical task?
-
+- Comment choisir un modèle mathématique approprié pour bien faire ma tâche d'analyse ?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Understand the model requirements for a specific research question
+- Comprendre les exigences du modèle pour une question de recherche spécifique
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: prereq
 
-+ Complete tutorial [Simulating transmission](../episodes/simulating-transmission.md)
-:::::::::::::::::::::::::::::::::
-
+- Compléter le tutoriel [Simuler la transmission](../episodes/simulating-transmission.md)
+  :::::::::::::::::::::::::::::::::
 
 ## Introduction
 
-There are existing mathematical models for different infections, interventions and transmission patterns which can be used to answer new questions. In this tutorial, we will learn how to choose an existing model to complete a given task.
+Il existe des modèles mathématiques pour différentes infections, interventions et schémas de transmission qui peuvent être utilisés pour répondre à de nouvelles questions. Dans ce tutoriel, nous apprendrons à choisir un modèle existant pour accomplir une tâche donnée.
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
-The focus of this tutorial is understanding existing models to decide if they are appropriate for a defined question. 
+L'objectif de ce tutoriel est de comprendre les modèles existants afin de décider s'ils sont appropriés pour une question donnée.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::: discussion
 
-### Choosing a model 
+### Choisir un modèle
 
-When deciding which mathematical model to use, there are a number of questions we must consider :
+Lorsqu'il s'agit de choisir le modèle mathématique à utiliser, un certain nombre de questions se posent :
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::: solution
 
-### What is the infection/disease of interest? 
+### Quelle est l'infection ou la maladie en question ?
 
-A model may already exist for your study disease, or there may be a model for an infection that has similar transmission pathways and epidemiological features that can be adapted. For example, diseases with similar transmission routes (e.g., airborne, droplet, or contact transmission) and similar natural history (e.g., incubation period, infectious period) may use similar model structures.
-
-:::::::::::::::::::::::::
-
-:::::::::::::::: solution
-
-### Do we need a [deterministic](../learners/reference.md#deterministic) or [stochastic](../learners/reference.md#stochastic) model? 
-
-Model structures differ depending on the scale and nature of the outbreak. When simulated numbers of infection are small, stochastic variation (i.e. randomness that we can define mathematically) in output can significantly affect whether an outbreak takes off or not. Outbreaks, which are typically localized events, may be better modeled using stochastic approaches to capture the uncertainty in early transmission dynamics. Epidemics, which are larger-scale events, can often be effectively modeled using deterministic approaches as the stochastic variation becomes less significant relative to the overall dynamics. It's important to note that the terms "outbreak" and "epidemic" can sometimes be used interchangeably depending on context, with outbreaks sometimes being considered as localized epidemics.
+Il se peut qu'un modèle existe déjà pour la maladie que vous étudiez, ou qu'il existe un modèle pour une infection dont les voies de transmission et les caractéristiques épidémiologiques sont similaires et qui peut être adapté. Par exemple, les maladies ayant des voies de transmission similaires (par exemple, transmission par voie aérienne, par gouttelettes ou par contact) et une histoire naturelle similaire (par exemple, période d'incubation, période infectieuse) peuvent utiliser des structures de modèle similaires.
 
 :::::::::::::::::::::::::
 
 :::::::::::::::: solution
 
-## What is the outcome of interest?
+### Avons-nous besoin d'un modèle [déterministe](../learners/reference.md#deterministic) ou [stochastique](../learners/reference.md#stochastic) ?
 
-The outcome of interest is typically a measurable quantity derived from the mathematical model. This could include:
-
-- The number of infections over time
-- The peak number of hospitalizations
-- The total number of severe disease cases
-- The final size of the epidemic
-- The timing of epidemic peaks
+Les structures des modèles diffèrent en fonction de l'ampleur et de la nature de l'épidémie. Lorsque le nombre d'infections simulées est faible, la variation stochastique (c'est-à-dire le caractère aléatoire que nous pouvons définir mathématiquement) des résultats peut avoir une incidence significative sur le déclenchement ou non d'une épidémie. Les épidémies localisés peuvent être mieux modélisées à l'aide d'approches stochastiques afin de saisir l'incertitude de la dynamique de transmission précoce. Les épidémies à plus grande échelle, peuvent souvent être modélisées efficacement à l'aide d'approches déterministes, car la variation stochastique devient moins importante par rapport à la dynamique globale. 
 
 :::::::::::::::::::::::::
 
 :::::::::::::::: solution
 
-## How is transmission modelled?
+## Quel est le résultat qui nous intéresse ?
 
-For example, [direct](../learners/reference.md#direct) or [indirect](../learners/reference.md#indirect), [airborne](../learners/reference.md#airborne) or [vector-borne](../learners/reference.md#vectorborne).
+Le résultat d'intérêt est généralement une quantité mesurable dérivée du modèle mathématique. Il peut s'agir de
+
+- le nombre d'infections au fil du temps
+- Le nombre maximal d'hospitalisations
+- Le nombre total de cas de maladies graves
+- L'ampleur finale de l'épidémie
+- Le moment des pics épidémiques
+
 :::::::::::::::::::::::::
-
 
 :::::::::::::::: solution
 
-## How are the different processes (e.g. transmission) formulated in the equations?
+## Comment la transmission est-elle modélisée ?
 
-There can be subtle differences in model structures for the same infection or outbreak type which can be missed without studying the equations. For example, transmissibility parameters can be specified as rates or probabilities. If you want to use parameter values from other published models, you must check that transmission is formulated in the same way. 
+Par exemple, [directes](../learners/reference.md#direct) ou [indirecte](../learners/reference.md#indirect), [par voie aérienne](../learners/reference.md#airborne) ou [à transmission vectorielle](../learners/reference.md#vectorborne).
 :::::::::::::::::::::::::
 
 :::::::::::::::: solution
 
-## Will any interventions be modelled? 
+## Comment les différents processus (par exemple la transmission) sont-ils formulés dans les équations ?
 
-Finally, interventions such as vaccination, social distancing, or treatment programs may be of interest. Different models have varying capabilities to incorporate interventions:
+Pour une même infection ou un même type d'épidémie, il peut y avoir des différences subtiles dans les structures des modèles, qui peuvent passer inaperçues si l'on n'étudie pas les équations. Par exemple, les paramètres de transmissibilité peuvent être spécifiés sous forme de taux ou de probabilités. Si vous souhaitez utiliser les valeurs des paramètres d'autres modèles publiés, vous devez vérifier que la transmission est formulée de la même manière.
+:::::::::::::::::::::::::
 
-- Some models can simulate continuous interventions (e.g., ongoing vaccination programs)
-- Others handle discrete interventions (e.g., one-time school closures)
-- Some models may not include intervention capabilities at all
+:::::::::::::::: solution
 
-We discuss interventions in detail in the tutorial [Modelling interventions](../episodes/modelling-interventions.md).
+## Des interventions seront-elles modélisées ?
+
+Il se peut que nous nous intéressions aux interventions telles que la vaccination, la distanciation physique ou les programmes de traitement. Les capacités d'intégration des interventions varient d'un modèle à l'autre :
+
+- Certains modèles peuvent simuler des interventions continues (par exemple, des programmes de vaccination délivrés en continu).
+- D'autres traitent les interventions discrètes (par exemple, les fermetures ponctuelles d'écoles).
+- Certains modèles ne comprennent aucune fonctionnalité permettant de modéliser les interventions.
+
+Nous discutons des interventions en détail dans le tutoriel [Modélisation des interventions](../episodes/modelling-interventions.md).
 
 :::::::::::::::::::::::::
 
+## Modèles disponibles en `{epidemics}`
 
-
-
-
-
-## Available  models in `{epidemics}`
- 
-The R package `{epidemics}` contains functions to run existing models.
-For details on the models that are available, see the package [Reference Guide of "Model functions"](https://epiverse-trace.github.io/epidemics/reference/index.html#model-functions). All model function names start with `model_*()`. To learn how to run the models in R, read the [Vignettes on "Guides to library models"](https://epiverse-trace.github.io/epidemics/articles/#guides-to-library-models). 
-
+Le package R `{epidemics}` contient des fonctions permettant d'exécuter les modèles existants.
+Pour plus de détails sur les modèles disponibles, consultez le package [Guide de référence des "Fonctions de modèle"](https://epiverse-trace.github.io/epidemics/reference/index.html#model-functions). Tous les noms des fonctions des modèles commencent par `model_*()`. Pour apprendre comment exécuter les modèles dans R, lisez le document suivant [Vignettes sur les "Guides pour les modèles de la bibliothèque"](https://epiverse-trace.github.io/epidemics/articles/#guides-to-library-models).
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-## What model?
+## Quel modèle ?
 
-You have been asked to explore the variation in numbers of infectious individuals in the early stages of an Ebola outbreak. 
+On vous a demandé d'étudier la variation du nombre de personnes infectieuses dans les premières phases d'une épidémie d'Ebola.
 
-Which of the following models would be an appropriate choice for this task:
+Parmi les modèles suivants, lequel serait le plus approprié pour cette tâche ?
 
-+  `model_default()`
+- `model_default()`
 
-+ `model_ebola()`
+- `model_ebola()`
 
 ::::::::::::::::: hint
 
-Consider the following questions:
+Réfléchissez aux questions suivantes :
 
 ::::::::::::::::::::::::::::::::::::: checklist
 
-+ What is the infection/disease of interest? 
-+ Do we need a deterministic or stochastic model? 
-+ What is the outcome of interest?
-+ Will any interventions be modelled? 
+- Quelle est l'infection ou la maladie en question ?
+- Avons-nous besoin d'un modèle déterministe ou stochastique ?
+- Quel est le résultat qui nous intéresse ?
+- Des interventions seront-elles modélisées ?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
 ::::::::::::::::::::::
-
 
 ::::::::::::::::: solution
 
-+ What is the infection/disease of interest? **Ebola**
-+ Do we need a deterministic or stochastic model?  **A stochastic model would allow us to explore variation in the early stages of the outbreak**
-+ What is the outcome of interest? **Number of infections**
-+ Will any interventions be modelled? **No**
+- Quelle est l'infection ou la maladie concernée ? **Ebola**
+- Faut-il un modèle déterministe ou stochastique ? **Un modèle stochastique nous permettrait d'étudier les variations au cours des premières phases de l'épidémie**
+- Quel est le résultat qui vous intéresse ? **Nombre d'infections**
+- Des interventions seront-elles modélisées ? **Non**
 
 #### `model_default()`
 
-A deterministic SEIR model with age specific direct transmission. 
+Un modèle SEIR (S: susceptible, E: exposé; I: infectieux; R: récupéré) déterministe avec une transmission directe spécifique à l'âge.
 
-```{r diagram, echo = FALSE, message = FALSE}
+```{r diagram, echo=FALSE, message=FALSE}
 DiagrammeR::grViz("digraph {
 
   # graph statement
@@ -184,31 +172,29 @@ DiagrammeR::grViz("digraph {
 
   # edges
   #######
-  S -> E [label = ' infection \n(transmissibility &beta;)']
-  E -> I [label = ' onset of infectiousness \n(infectiousness rate &alpha;)']
-  I -> R [label = ' recovery \n(recovery rate &gamma;)']
+  S -> E [label = ' infection \n(transmissibilité &beta;)']
+  E -> I [label = ' début de la contagiosité \n(taux de contagiosité &alpha;)']
+  I -> R [label = ' récupération \n(taux de récupération &gamma;)']
 
 }")
 ```
 
-
-The model is capable of simulating an Ebola type outbreak, but as the model is deterministic, we are not able to explore stochastic variation in the early stages of the outbreak.
-
+Le modèle est capable de simuler une épidémie de type Ebola, mais comme il est déterministe, nous ne sommes pas en mesure d'étudier les variations stochastiques au cours des premières phases de l'épidémie.
 
 #### `model_ebola()`
 
-A stochastic SEIHFR (Susceptible, Exposed, Infectious, Hospitalised, Funeral, Removed) model that was developed specifically for Ebola virus disease. The model includes unique compartments for Hospitalised and Funeral states, which are critical for understanding Ebola transmission dynamics due to the high risk of transmission in healthcare settings and during traditional burial practices. The model has stochasticity in the passage times between states, which are modelled as Erlang distributions.
+Un modèle stochastique SEIHFR (Susceptible, Exposé, Infectieux, Hospitalisé, Funéraire, Retiré) développé spécifiquement pour la maladie à virus Ebola. Le modèle comprend des compartiments pour les états Hospitalisé et Funéraire, qui sont essentiels pour comprendre la dynamique de transmission du virus Ebola en raison du risque élevé de transmission dans les établissements de soins de santé et pendant les pratiques funéraires traditionnelles. Le modèle présente une stochasticité dans les temps de passage entre les états, qui sont modélisés avec des distributions d'Erlang.
 
-The key parameters affecting the transition between states are:
+Les paramètres clés affectant la transition entre les états sont les suivants :
 
-+ $R_0$, the basic reproduction number,
-+ $\rho^I$, the mean infectious period,
-+ $\rho^E$, the mean preinfectious period,
-+ $p_{hosp}$ the probability of being transferred to the hospitalised compartment. 
+- $R_0$ le nombre de reproduction de base,
+- $\rho^I$ la période infectieuse moyenne,
+- $\rho^E$ la période préinfectieuse moyenne,
+- $p_{hosp}$ la probabilité d'être transféré dans le compartiment hospitalisé.
 
-**Note: the functional relationship between the preinfectious  period ($\rho^E$) and the transition rate between exposed and infectious ($\gamma^E$) is $\rho^E = k^E/\gamma^E$ where $k^E$ is the shape of the Erlang distribution. Similarly for the infectious period $\rho^I = k^I/\gamma^I$. For more detail on the stochastic model formulation refer to the section on [Discrete-time Ebola virus disease model](https://epiverse-trace.github.io/epidemics/articles/model_ebola.html#details-discrete-time-ebola-virus-disease-model) in the "Modelling responses to a stochastic Ebola virus epidemic" vignette. ** 
+\*\*Note : la relation fonctionnelle entre la période préinfectieuse ($\rho^E$) et le taux de transition entre exposé et infectieux ($\gamma^E$) est la suivante $\rho^E = k^E/\gamma^E$ où $k^E$ est le paramètre de forme de la distribution d'Erlang. De même, pour la période infectieuse $\rho^I = k^I/\gamma^I$. Pour plus de détails sur la formulation du modèle stochastique, vous pourriez regarder la section sur les [Modèle à temps discret de la maladie à virus Ebola](https://epiverse-trace.github.io/epidemics/articles/model_ebola.html#details-discrete-time-ebola-virus-disease-model) dans la vignette "Modélisation des réponses à une épidémie stochastique de virus Ebola". \*\*
 
-```{r, echo = FALSE, message = FALSE}
+```{r, echo=FALSE, message=FALSE}
 DiagrammeR::grViz("digraph {
 
   # graph statement
@@ -234,11 +220,11 @@ DiagrammeR::grViz("digraph {
   # edges
   #######
   S -> E [label = ' infection (&beta;)']
-  E -> I [label = ' onset of \ninfectiousness (&gamma; E)']
-  I -> F [label = ' death (funeral) \n(&gamma; I)']
-  F -> R [label = ' safe burial (one timestep) ']
+  E -> I [label = ' début de la\ncontagiosité (&gamma; E)']
+  I -> F [label = ' mort (funérailles) \n(&gamma; I)']
+  F -> R [label = ' enterrements dignes et sécurisés (un pas de temps) ']
   I -> H [label = ' hospitalisation (p hosp)']
-  H -> R [label = ' recovery or safe burial \n (&gamma; I)']
+  H -> R [label = ' récupération ou enterrements dignes et sécurisés \n (&gamma; I)']
 
   subgraph {
     rank = same; I; F;
@@ -249,68 +235,62 @@ DiagrammeR::grViz("digraph {
 }")
 ```
 
-The model has additional parameters describing the transmission risk in hospital and funeral settings: 
+Le modèle comporte des paramètres supplémentaires décrivant le risque de transmission dans les hôpitaux et les les funérailles :
 
-+ $p_{ETU}$, the proportion of hospitalised cases contributing to the infection of susceptibles (ETU = Ebola virus treatment units),
-+ $p_{funeral}$, the proportion of funerals at which the risk of transmission is the same as of infectious individuals in the community.
+- $p_{ETU}$ la proportion de cas hospitalisés contribuant à l'infection de personnes sensibles (ETU = unités de traitement du virus Ebola),
+- $p_{funeral}$ la proportion de funérailles au cours desquelles le risque de transmission est le même que pour les personnes infectieuses dans la communauté.
 
-As this model is stochastic, it is the most appropriate choice to explore how variation in numbers of infected individuals in the early stages of an Ebola outbreak. 
-
+Ce modèle étant stochastique, il constitue le choix le plus approprié pour étudier la variation du nombre de personnes infectées au cours des premières phases d'une épidémie d'Ebola.
 
 :::::::::::::::::::::::::::
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-
 
 ::::::::::::::::::::::::::::::::::::: callout
-### Do I need to use a mathematical model?
 
-Mathematical models can be used to generate disease trajectories, which can then be used to calculate the final size of the epidemic. If you are only interested in the final size, it is possible to use mathematical theory to calculate this quantity directly, without having to simulate the full model then work out how many individuals were infected. These mathematical calculations are performed using R functions in the package `{finalsize}`.
+### Devrais-je utiliser un modèle mathématique ?
 
-An advantage of using `finalsize` is that fewer parameters are required. You only need to define transmissibility and the susceptibility of the population, and a social contact matrix if relevant, rather than parameters like infectious period that are required in {epidemics} to simulate dynamics over time. Check out the [package vignettes](https://epiverse-trace.github.io/finalsize/articles/finalsize.html) for more information on how to use `finalsize` to calculate epidemic size. 
+Les modèles mathématiques peuvent être utilisés pour générer des trajectoires de maladie, qui peuvent ensuite être utilisées pour calculer la taille finale de l'épidémie. Si seule la taille finale vous intéresse, il est possible d'utiliser la théorie mathématique pour calculer directement cette quantité, sans avoir à simuler le modèle complet puis déterminer le nombre d'individus infectés. Ces calculs mathématiques sont effectués à l'aide de fonctions R dans le paquetage `{finalsize}`.
+
+L'avantage d'utiliser `finalsize` est que moins de paramètres sont nécessaires. Il suffit de définir la transmissibilité et la susceptibilité de la population, ainsi qu'une matrice de contacts si pertinent, plutôt que des paramètres tels que la période infectieuse, qui sont nécessaires dans le cadre du package {epidemics} pour simuler la dynamique dans le temps. Consultez la page [vignettes du paquet](https://epiverse-trace.github.io/finalsize/articles/finalsize.html) pour plus d'informations sur l'utilisation de `finalsize` pour calculer la taille de l'épidémie.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-
-## Challenge : Ebola outbreak analysis 
-
-
+## Défi : Analyse de l'épidémie d'Ebola
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-## Running the model
+## Exécution du modèle
 
-You have been tasked to generate initial trajectories of an Ebola outbreak in Guinea. Using `model_ebola()` and the the information detailed below, complete the following tasks:
+Vous avez été chargé de générer les trajectoires initiales d'une épidémie d'Ebola en Guinée. En utilisant `model_ebola()` et les informations détaillées ci-dessous, effectuez les tâches suivantes :
 
-1. Run the model once and plot the number of infectious individuals  through time
-2. Run model 100 times and plot the mean, upper and lower 95% quantiles of the number of infectious individuals through time
+1. Exécutez le modèle une fois et représentez graphiquement le nombre d'individus infectieux au fil du temps.
+2. Exécutez le modèle 100 fois et représentez la moyenne, les quantiles supérieurs et inférieurs à 95 % du nombre d'individus infectieux en fonction du temps.
 
-+ Population size : 14 million
-+ Initial number of exposed individuals : 10
-+ Initial number of infectious individuals : 5
-+ Time of simulation : 120 days
-+ Parameter values : 
-  + $R_0$ (`r0`) = 1.1,
-  + $p^I$ (`infectious_period`) = 12,
-  + $p^E$ (`preinfectious_period`) = 5,
-  + $k^E=k^I = 2$, 
-  + $1-p_{hosp}$ (`prop_community`) = 0.9,
-  + $p_{ETU}$ (`etu_risk`) = 0.7,
-  + $p_{funeral}$ (`funeral_risk`) = 0.5
+- Taille de la population : 14 millions
+- Nombre initial d'individus exposés : 10
+- Nombre initial d'individus infectieux : 5
+- Durée de la simulation : 120 jours
+- Valeurs des paramètres :
+  - $R_0$ (`r0`) = 1.1,
+  - $p^I$ (`infectious_period`) = 12,
+  - $p^E$ (`preinfectious_period`) = 5,
+  - $k^E=k^I = 2$,
+  - $1-p_{hosp}$ (`prop_community`) = 0.9,
+  - $p_{ETU}$ (`etu_risk`) = 0.7,
+  - $p_{funeral}$ (`funeral_risk`) = 0.5
 
 ::::::::::::::::: hint
 
-### Code for initial conditions 
+### Code pour les conditions initiales
 
 ```{r}
-# set population size
+# définir la taille de la population 
 population_size <- 14e6
 
 E0 <- 10
 I0 <- 5
-# prepare initial conditions as proportions
+# préparer les conditions initiales sous forme de proportions.
 initial_conditions <- c(
   S = population_size - (E0 + I0), E = E0, I = I0, H = 0, F = 0, R = 0
 ) / population_size
@@ -326,22 +306,19 @@ guinea_population <- population(
 )
 ```
 
-
 ::::::::::::::::::::::
-
 
 ::::::::::::::::: hint
 
-### HINT : Multiple model simulations
+### Indice : simulations de modèles multiples
 
-Adapt the code from the [accounting for uncertainty](../episodes/simulating-transmission.md#accounting-for-uncertainty) section
+Adaptez le code de la section [prise en compte de l'incertitude](../episodes/simulating-transmission.md#accounting-for-uncertainty) 
 
 ::::::::::::::::::::::
 
 ::::::::::::::::: solution
 
-1. Run the model once and plot the number of infectious individuals  through time
-
+1. Exécutez le modèle une fois et représentez le nombre d'individus infectieux en fonction du temps.
 
 ```{r}
 output <- model_ebola(
@@ -375,9 +352,9 @@ output %>%
   )
 ```
 
-2. Run model 100 times and plot the mean, upper and lower 95% quantiles of the number of infectious individuals through time
+2. Exécutez le modèle 100 fois et représentez la moyenne, les quantiles supérieurs et inférieurs à 95 % du nombre d'individus infectieux en fonction du temps.
 
-We run the model 100 times with the *same* parameter values. 
+Nous exécutons le modèle 100 fois avec les *même* valeurs des paramètres.
 
 ```{r}
 output_replicates <- model_ebola(
@@ -419,13 +396,10 @@ output_replicates %>%
 
 :::::::::::::::::::::::::::
 
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::: keypoints
 
-
-::::::::::::::::::::::::::::::::::::: keypoints 
-
-- Existing mathematical models should be selected according to the research question
-- It is important to check that a model has appropriate assumptions about transmission, outbreak potential, outcomes and interventions 
+- Les modèles mathématiques existants doivent être sélectionnés en fonction de la question de recherche.
+- Il est important de vérifier qu'un modèle repose sur des hypothèses appropriées concernant la transmission, le potentiel épidémique, les résultats et les interventions.
 ::::::::::::::::::::::::::::::::::::::::::::::::

@@ -61,7 +61,7 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 episodes:
 - contact-matrices.Rmd
 - simulating-transmission.Rmd
-#- model-choices.Rmd
+- model-choices.Rmd
 - modelling-interventions.Rmd
 - compare-interventions.Rmd
 #- vaccine-comparisons.Rmd
