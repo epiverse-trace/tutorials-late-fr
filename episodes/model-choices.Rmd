@@ -285,7 +285,7 @@ Vous avez été chargé de générer les trajectoires initiales d'une épidémie
 ### Code pour les conditions initiales
 
 ```{r}
-# définir la taille de la population 
+# définir la taille de la population
 population_size <- 14e6
 
 E0 <- 10
