@@ -142,8 +142,7 @@ Réfléchissez aux questions suivantes :
 
 Un modèle SEIR (S: susceptible, E: exposé; I: infectieux; R: récupéré) déterministe avec une transmission directe spécifique à l'âge.
 
-<!--html_preserve--><div class="grViz html-widget html-fill-item" id="htmlwidget-2907d53b0871e7dbf834" style="width:504px;height:504px;"></div>
-<script type="application/json" data-for="htmlwidget-2907d53b0871e7dbf834">{"x":{"diagram":"digraph {\n\n  # graph statement\n  #################\n  graph [layout = dot,\n         rankdir = LR,\n         overlap = true,\n         fontsize = 10]\n\n  # nodes\n  #######\n  node [shape = square,\n       fixedsize = true\n       width = 1.3]\n\n       S\n       E\n       I\n       R\n\n  # edges\n  #######\n  S -> E [label = \" infection \n(transmissibilité &beta;)\"]\n  E -> I [label = \" début de la contagiosité \n(taux de contagiosité &alpha;)\"]\n  I -> R [label = \" récupération \n(taux de récupération &gamma;)\"]\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<img src="fig/model-choices-rendered-diagram-1.png" style="display: block; margin: auto;" />
 
 Le modèle est capable de simuler une épidémie de type Ebola, mais comme il est déterministe, nous ne sommes pas en mesure d'étudier les variations stochastiques au cours des premières phases de l'épidémie.
 
@@ -160,8 +159,7 @@ Les paramètres clés affectant la transition entre les états sont les suivants
 
 \*\*Note : la relation fonctionnelle entre la période préinfectieuse ($\rho^E$) et le taux de transition entre exposé et infectieux ($\gamma^E$) est la suivante $\rho^E = k^E/\gamma^E$ où $k^E$ est le paramètre de forme de la distribution d'Erlang. De même, pour la période infectieuse $\rho^I = k^I/\gamma^I$. Pour plus de détails sur la formulation du modèle stochastique, vous pourriez regarder la section sur les [Modèle à temps discret de la maladie à virus Ebola](https://epiverse-trace.github.io/epidemics/articles/model_ebola.html#details-discrete-time-ebola-virus-disease-model) dans la vignette "Modélisation des réponses à une épidémie stochastique de virus Ebola". \*\*
 
-<!--html_preserve--><div class="grViz html-widget html-fill-item" id="htmlwidget-e4af9ca629df551fc17d" style="width:504px;height:504px;"></div>
-<script type="application/json" data-for="htmlwidget-e4af9ca629df551fc17d">{"x":{"diagram":"digraph {\n\n  # graph statement\n  #################\n  graph [layout = dot,\n  rankdir = LR,\n  overlap = true,\n  fontsize = 10]\n\n  # nodes\n  #######\n  node [shape = square,\n       fixedsize = true\n       width = 1.3]\n\n       S\n       E\n       I\n       H\n       F\n       R\n\n  # edges\n  #######\n  S -> E [label = \" infection (&beta;)\"]\n  E -> I [label = \" début de la\ncontagiosité (&gamma; E)\"]\n  I -> F [label = \" mort (funérailles) \n(&gamma; I)\"]\n  F -> R [label = \" enterrements dignes et sécurisés (un pas de temps) \"]\n  I -> H [label = \" hospitalisation (p hosp)\"]\n  H -> R [label = \" récupération ou enterrements sécurisés \n (&gamma; I)\"]\n\n  subgraph {\n    rank = same; I; F;\n  }\n  subgraph {\n    rank = same; H; R;\n  }\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<img src="fig/model-choices-rendered-unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
 
 Le modèle comporte des paramètres supplémentaires décrivant le risque de transmission dans les hôpitaux et les les funérailles :
 
