@@ -325,7 +325,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Choisir un modèle approprié</h1>
-        <p>Dernière mise à jour le 2025-11-24 |
+        <p>Dernière mise à jour le 2026-03-31 |
 
         <a href="https://github.com/epiverse-trace/tutorials-late-fr/edit/main/episodes/model-choices.Rmd" class="external-link">Modifier cette page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -569,11 +569,7 @@ d’infections</strong>
 <p>Un modèle SEIR (S: susceptible, E: exposé; I: infectieux; R:
 récupéré) déterministe avec une transmission directe spécifique à
 l’âge.</p>
-<!--html_preserve-->
-<div id="htmlwidget-2907d53b0871e7dbf834" class="grViz html-widget html-fill-item" style="width:504px;height:504px;">
-
-</div>
-<script type="application/json" data-for="htmlwidget-2907d53b0871e7dbf834">{"x":{"diagram":"digraph {\n\n  # graph statement\n  #################\n  graph [layout = dot,\n         rankdir = LR,\n         overlap = true,\n         fontsize = 10]\n\n  # nodes\n  #######\n  node [shape = square,\n       fixedsize = true\n       width = 1.3]\n\n       S\n       E\n       I\n       R\n\n  # edges\n  #######\n  S -> E [label = \" infection \n(transmissibilité &beta;)\"]\n  E -> I [label = \" début de la contagiosité \n(taux de contagiosité &alpha;)\"]\n  I -> R [label = \" récupération \n(taux de récupération &gamma;)\"]\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve--><p>Le modèle est capable de simuler une épidémie de type Ebola, mais
+<figure><img src="fig/model-choices-rendered-diagram-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Le modèle est capable de simuler une épidémie de type Ebola, mais
 comme il est déterministe, nous ne sommes pas en mesure d’étudier les
 variations stochastiques au cours des premières phases de
 l’épidémie.</p>
@@ -612,11 +608,7 @@ regarder la section sur les <a href="https://epiverse-trace.github.io/epidemics/
 à temps discret de la maladie à virus Ebola</a> dans la vignette
 “Modélisation des réponses à une épidémie stochastique de virus Ebola”.
 **</p>
-<!--html_preserve-->
-<div id="htmlwidget-e4af9ca629df551fc17d" class="grViz html-widget html-fill-item" style="width:504px;height:504px;">
-
-</div>
-<script type="application/json" data-for="htmlwidget-e4af9ca629df551fc17d">{"x":{"diagram":"digraph {\n\n  # graph statement\n  #################\n  graph [layout = dot,\n  rankdir = LR,\n  overlap = true,\n  fontsize = 10]\n\n  # nodes\n  #######\n  node [shape = square,\n       fixedsize = true\n       width = 1.3]\n\n       S\n       E\n       I\n       H\n       F\n       R\n\n  # edges\n  #######\n  S -> E [label = \" infection (&beta;)\"]\n  E -> I [label = \" début de la\ncontagiosité (&gamma; E)\"]\n  I -> F [label = \" mort (funérailles) \n(&gamma; I)\"]\n  F -> R [label = \" enterrements dignes et sécurisés (un pas de temps) \"]\n  I -> H [label = \" hospitalisation (p hosp)\"]\n  H -> R [label = \" récupération ou enterrements sécurisés \n (&gamma; I)\"]\n\n  subgraph {\n    rank = same; I; F;\n  }\n  subgraph {\n    rank = same; H; R;\n  }\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve--><p>Le modèle comporte des paramètres supplémentaires décrivant le risque
+<figure><img src="fig/model-choices-rendered-unnamed-chunk-1-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Le modèle comporte des paramètres supplémentaires décrivant le risque
 de transmission dans les hôpitaux et les les funérailles :</p>
 <ul><li>
 <span class="math inline">\(p_{ETU}\)</span> la proportion de cas
@@ -923,8 +915,8 @@ any links that you are not going to use.
   "url": "https://epiverse-trace.github.io/tutorials-late-fr/model-choices.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-late-fr/model-choices.html",
   "dateCreated": "2025-11-24",
-  "dateModified": "2025-11-24",
-  "datePublished": "2026-03-24"
+  "dateModified": "2026-03-31",
+  "datePublished": "2026-03-31"
 }
 
   </script><script>

@@ -364,7 +364,7 @@
         
 <section id="aio-contact-matrices"><p>Content from <a href="contact-matrices.html">Matrices de contact</a></p>
 <hr>
-<p>Dernière mise à jour le 2025-11-23 |
+<p>Dernière mise à jour le 2026-03-31 |
 
         <a href="https://github.com/epiverse-trace/tutorials-late-fr/edit/main/episodes/contact-matrices.Rmd" class="external-link">Modifier cette page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -602,7 +602,7 @@ Pour télécharger une enquête, vous pouvez utiliser
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Afficher les détails </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>Vous pouvez explorer toutes les enquêtes disponibles dans le
 référentiel Zenodo à l’adresse <a href="https://zenodo.org/communities/social_contact_data/" class="external-link uri">https://zenodo.org/communities/social_contact_data/</a>. Si
@@ -658,7 +658,7 @@ matrice de contact.</p></li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Donner un indice </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>L’objet d’enquête <code>zambia_sa_survey</code> contient des données
 provenant de deux pays. Si vous avez besoin d’estimer la matrice des
@@ -978,7 +978,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-simulating-transmission"><p>Content from <a href="simulating-transmission.html">Simulation de la transmission</a></p>
 <hr>
-<p>Dernière mise à jour le 2025-11-23 |
+<p>Dernière mise à jour le 2026-03-31 |
 
         <a href="https://github.com/epiverse-trace/tutorials-late-fr/edit/main/episodes/simulating-transmission.Rmd" class="external-link">Modifier cette page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1867,7 +1867,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-model-choices"><p>Content from <a href="model-choices.html">Choisir un modèle approprié</a></p>
 <hr>
-<p>Dernière mise à jour le 2025-11-24 |
+<p>Dernière mise à jour le 2026-03-31 |
 
         <a href="https://github.com/epiverse-trace/tutorials-late-fr/edit/main/episodes/model-choices.Rmd" class="external-link">Modifier cette page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2127,11 +2127,7 @@ d’infections</strong>
 <p>Un modèle SEIR (S: susceptible, E: exposé; I: infectieux; R:
 récupéré) déterministe avec une transmission directe spécifique à
 l’âge.</p>
-<!--html_preserve-->
-<div id="htmlwidget-2907d53b0871e7dbf834" class="grViz html-widget html-fill-item" style="width:504px;height:504px;">
-
-</div>
-<script type="application/json" data-for="htmlwidget-2907d53b0871e7dbf834">{"x":{"diagram":"digraph {\n\n  # graph statement\n  #################\n  graph [layout = dot,\n         rankdir = LR,\n         overlap = true,\n         fontsize = 10]\n\n  # nodes\n  #######\n  node [shape = square,\n       fixedsize = true\n       width = 1.3]\n\n       S\n       E\n       I\n       R\n\n  # edges\n  #######\n  S -> E [label = \" infection \n(transmissibilité &beta;)\"]\n  E -> I [label = \" début de la contagiosité \n(taux de contagiosité &alpha;)\"]\n  I -> R [label = \" récupération \n(taux de récupération &gamma;)\"]\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve--><p>Le modèle est capable de simuler une épidémie de type Ebola, mais
+<figure><img src="fig/model-choices-rendered-diagram-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Le modèle est capable de simuler une épidémie de type Ebola, mais
 comme il est déterministe, nous ne sommes pas en mesure d’étudier les
 variations stochastiques au cours des premières phases de
 l’épidémie.</p>
@@ -2174,11 +2170,7 @@ regarder la section sur les <a href="https://epiverse-trace.github.io/epidemics/
 à temps discret de la maladie à virus Ebola</a> dans la vignette
 “Modélisation des réponses à une épidémie stochastique de virus Ebola”.
 **</p>
-<!--html_preserve-->
-<div id="htmlwidget-e4af9ca629df551fc17d" class="grViz html-widget html-fill-item" style="width:504px;height:504px;">
-
-</div>
-<script type="application/json" data-for="htmlwidget-e4af9ca629df551fc17d">{"x":{"diagram":"digraph {\n\n  # graph statement\n  #################\n  graph [layout = dot,\n  rankdir = LR,\n  overlap = true,\n  fontsize = 10]\n\n  # nodes\n  #######\n  node [shape = square,\n       fixedsize = true\n       width = 1.3]\n\n       S\n       E\n       I\n       H\n       F\n       R\n\n  # edges\n  #######\n  S -> E [label = \" infection (&beta;)\"]\n  E -> I [label = \" début de la\ncontagiosité (&gamma; E)\"]\n  I -> F [label = \" mort (funérailles) \n(&gamma; I)\"]\n  F -> R [label = \" enterrements dignes et sécurisés (un pas de temps) \"]\n  I -> H [label = \" hospitalisation (p hosp)\"]\n  H -> R [label = \" récupération ou enterrements sécurisés \n (&gamma; I)\"]\n\n  subgraph {\n    rank = same; I; F;\n  }\n  subgraph {\n    rank = same; H; R;\n  }\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve--><p>Le modèle comporte des paramètres supplémentaires décrivant le risque
+<figure><img src="fig/model-choices-rendered-unnamed-chunk-1-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Le modèle comporte des paramètres supplémentaires décrivant le risque
 de transmission dans les hôpitaux et les les funérailles :</p>
 <ul>
 <li>
@@ -2446,7 +2438,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-modelling-interventions"><p>Content from <a href="modelling-interventions.html">Modélisation des interventions</a></p>
 <hr>
-<p>Dernière mise à jour le 2025-11-23 |
+<p>Dernière mise à jour le 2026-03-31 |
 
         <a href="https://github.com/epiverse-trace/tutorials-late-fr/edit/main/episodes/modelling-interventions.Rmd" class="external-link">Modifier cette page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2507,7 +2499,7 @@ d’intervention</a>.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Afficher les détails </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>Installer les packages si elles ne le sont pas déjà:</p>
 <div class="codewrapper sourceCode" id="cb1">
@@ -3033,7 +3025,7 @@ le plus le nombre maximal de personnes infectieuses ?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Montrer la solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3092,7 +3084,7 @@ seront pas comptées comme des infections.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
   <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Afficher les détails </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>Notez que si nous ajoutons by_group = FALSE dans
 epidemics::new_infections(), nous obtenons un résumé des nouvelles
@@ -3196,7 +3188,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  --></section></section><section id="aio-compare-interventions"><p>Content from <a href="compare-interventions.html">Comparer les résultats des interventions de santé publique</a></p>
 <hr>
-<p>Dernière mise à jour le 2025-11-23 |
+<p>Dernière mise à jour le 2026-03-31 |
 
         <a href="https://github.com/epiverse-trace/tutorials-late-fr/edit/main/episodes/compare-interventions.Rmd" class="external-link">Modifier cette page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -4111,8 +4103,8 @@ any links that you are not going to use.
   "url": "https://epiverse-trace.github.io/tutorials-late-fr/aio.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-late-fr/aio.html",
   "dateCreated": "2025-11-24",
-  "dateModified": "2026-03-24",
-  "datePublished": "2026-03-24"
+  "dateModified": "2026-03-31",
+  "datePublished": "2026-03-31"
 }
 
   </script><script>
