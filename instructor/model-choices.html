@@ -230,21 +230,12 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         3. Choisir un modèle approprié
         </span>
-      </button>
+      
     </div><!--/div.accordion-header-->
-
-    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
-      <div class="accordion-body">
-        <ul><li><a href="#introduction">Introduction</a></li>
-<li><a href="#mod%C3%A8les-disponibles-en-epidemics">Modèles disponibles en <code>{epidemics}</code></a></li>
-<li><a href="#d%C3%A9fi-analyse-de-l%C3%A9pid%C3%A9mie-debola">Défi : Analyse de l’épidémie d’Ebola</a></li>
-        </ul></div><!--/div.accordion-body-->
-    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -362,11 +353,20 @@ spécifique</li>
 </div>
 </div>
 </div>
-<p>::::::::::::::::::::::::::::::::::::: prereq</p>
-<ul><li>Compléter le tutoriel <a href="simulating-transmission.html">Simuler
-la transmission</a> :::::::::::::::::::::::::::::::::</li>
-</ul><section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
-<hr class="half-width"><p>Il existe des modèles mathématiques pour différentes infections,
+<div id="prereq1" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Pré-requis</h3>
+<div class="callout-content">
+<ul><li>
+<p>Compléter le tutoriel <a href="simulating-transmission.html">Simuler la transmission</a></p>
+<p>:::::::::::::::::::::::::::::::::</p>
+</li>
+</ul><div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
+<p>Il existe des modèles mathématiques pour différentes infections,
 interventions et schémas de transmission qui peuvent être utilisés pour
 répondre à de nouvelles questions. Dans ce tutoriel, nous apprendrons à
 choisir un modèle existant pour accomplir une tâche donnée.</p>
@@ -507,9 +507,11 @@ interventions</a>.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="modèles-disponibles-en-epidemics">Modèles disponibles en <code>{epidemics}</code>
+</div>
+<div class="section level2">
+<h2 id="modèles-disponibles-en-epidemics">Modèles disponibles en <code>{epidemics}</code>
 <a class="anchor" aria-label="anchor" href="#mod%C3%A8les-disponibles-en-epidemics"></a></h2>
-<hr class="half-width"><p>Le package R <code>{epidemics}</code> contient des fonctions
+<p>Le package R <code>{epidemics}</code> contient des fonctions
 permettant d’exécuter les modèles existants. Pour plus de détails sur
 les modèles disponibles, consultez le package <a href="https://epiverse-trace.github.io/epidemics/reference/index.html#model-functions" class="external-link">Guide
 de référence des “Fonctions de modèle”</a>. Tous les noms des fonctions
@@ -666,8 +668,10 @@ du paquet</a> pour plus d’informations sur l’utilisation de
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="défi-analyse-de-lépidémie-debola">Défi : Analyse de l’épidémie d’Ebola<a class="anchor" aria-label="anchor" href="#d%C3%A9fi-analyse-de-l%C3%A9pid%C3%A9mie-debola"></a></h2>
-<hr class="half-width"><div id="exécution-du-modèle" class="callout challenge">
+</div>
+<div class="section level2">
+<h2 id="défi-analyse-de-lépidémie-debola">Défi : Analyse de l’épidémie d’Ebola<a class="anchor" aria-label="anchor" href="#d%C3%A9fi-analyse-de-l%C3%A9pid%C3%A9mie-debola"></a></h2>
+<div id="exécution-du-modèle" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -871,7 +875,14 @@ résultats et les interventions.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></div> <!-- / div.lesson-content -->
+</div>
+</div>
+</div>
+</div>
+
+
+
+      </div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Chapitre Précédent et Suivant"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/simulating-transmission.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Précédent</a>
         <a class="chapter-link float-end" href="../instructor/modelling-interventions.html">Suivant<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -930,7 +941,7 @@ any links that you are not going to use.
   "identifier": "https://epiverse-trace.github.io/tutorials-late-fr/instructor/model-choices.html",
   "dateCreated": "2025-11-24",
   "dateModified": "2026-04-28",
-  "datePublished": "2026-04-28"
+  "datePublished": "2026-05-05"
 }
 
   </script><script>
